@@ -1,0 +1,31 @@
+:host{
+  font-family: Roboto, sans-serif;
+}
+html{
+  font-size: 16px;
+}
+@heading-name: heading;
+@heading-default-name: h;
+@heading-count: 6;
+
+.generate-heading(@i: 1) when (@i =< @heading-count){
+  .@{heading-name}-@{i} {
+    font-family: 'Roboto Slab', serif;
+    font-size: 3.4rem - 0.4rem*@i;
+  }
+  .@{heading-default-name}-@{i} {
+    font-family: 'Roboto Slab', serif;
+  }
+  .generate-heading(@i + 1);
+}
+.generate-heading();
+
+@a-prefix: a-theme;
+@badge-colors: blue #7FB3D4, gray #767676, green #8CC079, red #b35d5d;
+
+.make-a(@a-prefix, @badge-colors);
+/* IMG' s*/
+.img-resp{
+  max-width: 100%;
+}
+/* IMG' s*/
