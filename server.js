@@ -14,9 +14,13 @@ const usersScheme = new Schema({
 const productsScheme = new Schema({
   article: String,
   name: String,
-  price: Number
+  price: Number,
+  category: String
 });
+
 const User = mongoose.model("User", usersScheme);
+const Product = mongoose.model("Product", productsScheme);
+
 mongoose.connect("mongodb://localhost:27017/bookmagdb", { useNewUrlParser: true }, function (err) {
   if(err) return console.log(err);
   app.listen(3000, function () {
@@ -27,6 +31,8 @@ mongoose.connect("mongodb://localhost:27017/bookmagdb", { useNewUrlParser: true 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
+const JWT_SECRET = 'af34dac1r1qwg2';
 
 app.post('/api/authenticate', (req, res) => {
   if (req.body) {
@@ -51,4 +57,16 @@ app.post('/api/authenticate', (req, res) => {
   }
 });
 
-const JWT_SECRET = 'af34dac1r1qwg2';
+app.get('/api/books', (req, res) => {
+  Product.find({}, function (err, products) {
+    if(err) return console.log(err);
+    res.send(products);
+  });
+});
+
+app.get('/api/books/:category', (req, res) => {
+  Product.find({category: req.params.category}, function (err, products) {
+    if(err) return console.log(err);
+    res.send(products);
+  });
+});
