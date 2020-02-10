@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
       login: ['', [Validators.required]],
       password: ['',
         [
-          Validators.required
+          Validators.required,
+          Validators.pattern('^[a-zA-Z][a-zA-Z0-9-_@\.]{2,20}$')
         ]
       ],
     });
