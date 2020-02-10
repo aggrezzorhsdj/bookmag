@@ -3,7 +3,9 @@ let express = require('express'),
   mongoose = require('mongoose'),
   cors = require('cors'),
   bodyParser = require('body-parser'),
-  dbConfig = require('./database/db');
+  dbConfig = require('./database/db'),
+  config = require('./config/config'),
+  createError = require('http-errors')
 
 
 mongoose.Promise = global.Promise;
@@ -17,16 +19,24 @@ mongoose.connect(dbConfig.db, {
   }
 )
 
-const employeeRoute = require('./routes/employee.route')
+const productsRoute = require('./routes/products.route')
+const usersRoute = require('./routes/users.route');
+
 const app = express();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
 app.use(cors());
+
 app.use(express.static(path.join(__dirname, '../dist/bookmag')));
 app.use('/', express.static(path.join(__dirname, '../dist/bookmag')));
-app.use('/api', employeeRoute)
+
+app.use('/api/products', productsRoute)
+
+app.use('/api/users/', usersRoute);
 
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
