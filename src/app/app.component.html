@@ -17,7 +17,9 @@
           <input class="input input_default input__search" name="main_search" placeholder="Поиск книг"/>
       </li>
       <li class="nav__navbar__item nav__navbar__item">
-        <a class="a-theme a-theme nav__navbar__item__link" routerLink="/login">Профиль</a>
+
+        <a class="a-theme a-theme nav__navbar__item__link" routerLink="/login">Вход</a>
+        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="authService.logIn" routerLink="/profile">Профиль</a>
       </li>
       <li class="nav__navbar__item nav__navbar__item">
         <a class="a-theme a-theme nav__navbar__item__link">Корзина</a>

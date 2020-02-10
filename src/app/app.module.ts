@@ -13,6 +13,7 @@ import {PagenotfoundComponent} from './pagenotfound/pagenotfound.component';
 import { BookseditComponent } from './booksedit/booksedit.component';
 import { BooksaddComponent } from './booksadd/booksadd.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {ReactiveFormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

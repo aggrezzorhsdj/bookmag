@@ -10,7 +10,8 @@ let Users = require('../models/users.model');
 
 // Add Users
 usersRoute.route('/authenticate').post((req, res, next) => {
-  Users.findOne({login: req.login, password: req.password}, (error, data) => {
+  console.log(req.body);
+  Users.findOne({login: req.body.login, password: req.body.password}, (error, data) => {
     if (error) {
       return next(error)
     } else {
