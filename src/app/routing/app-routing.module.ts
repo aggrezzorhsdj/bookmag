@@ -12,11 +12,11 @@ import {BooksaddComponent} from '../booksadd/booksadd.component';
 
 const appRoute: Routes = [
   {path: '', component: MainComponent},
-  {path: '/login', component: LoginComponent},
-  {path: '/profile', component: ProfileComponent},
-  {path: '/books', component: BooksComponent},
-  {path: '/books/edit/:id', component: BookseditComponent},
-  {path: '/books/add', component: BooksaddComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'profile', component: ProfileComponent},
+  {path: 'books', component: BooksComponent},
+  {path: 'books/edit/:id', component: BookseditComponent},
+  {path: 'books/add', component: BooksaddComponent},
   {path: '**', component: PagenotfoundComponent},
 ];
 

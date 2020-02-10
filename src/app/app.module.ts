@@ -12,6 +12,7 @@ import {LoginComponent} from './login/login.component';
 import {PagenotfoundComponent} from './pagenotfound/pagenotfound.component';
 import { BookseditComponent } from './booksedit/booksedit.component';
 import { BooksaddComponent } from './booksadd/booksadd.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BooksaddComponent } from './booksadd/booksadd.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

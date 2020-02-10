@@ -1,1 +1,19 @@
-<p>login works!</p>
+<div class="container small-container">
+  <form [formGroup]="loginForm" class="form" (ngSubmit)="onSubmit()">
+    <div class="form__group">
+      <label for="login">Логин</label>
+      <input class="input form__search" id="login" name="login" formControlName="login"/>
+      <div class="invalid-control" *ngIf="submitted && myForm.login.errors?.required">
+        Введите логин
+      </div>
+    </div>
+    <div class="form__group">
+      <label for="password">Пароль</label>
+      <input class="input form__search" id="password" name="password" formControlName="password"/>
+      <div class="invalid-control" *ngIf="submitted && myForm.password.errors?.required">
+        Введите Пароль
+      </div>
+    </div>
+    <button class="button" type="submit">Ввойти</button>
+  </form>
+</div>

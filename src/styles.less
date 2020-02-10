@@ -2,7 +2,15 @@
 *{
   box-sizing: border-box;
   font-family: Roboto, sans-serif;
+  font-size: 1.6rem;
 }
+
+@blue: #7FB3D4;
+@gray: #767676;
+@green: #8CC079;
+@red: #b35d5d;
+@black: #0e0e0e;
+
 html{
   font-size: 10px;
 }
@@ -14,3 +22,101 @@ body{
 p,a{
   font-size: 1.6rem;
 }
+/*Container*/
+.container{
+  padding: 0 2rem;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+.small-container{
+  max-width: 37rem;
+}
+/*Container*/
+/*Form*/
+@input-bg: #d4d4d4;
+@input-border: #d4d4d4;
+.form{
+  &__search{
+    width: 100%;
+  }
+  &__group{
+    margin-bottom: 2rem;
+  }
+}
+.invalid-control{
+  padding: 1rem 0;
+  color:@red;
+}
+.input{
+  outline: none;
+  border: 0.1rem solid @input-border;
+  padding: 1rem;
+  color:#000;
+  border-radius: 0.4rem;
+  background-color: @input-bg;
+  transition: 0.3s;
+  &:focus,&:active,&:hover{
+    background: transparent;
+    box-shadow: 0 0 0 0.3rem rgba(212, 212, 212, 0.45);
+  }
+  &__search{
+    width: 100%;
+  }
+}
+/*Form*/
+/*Buttons*/
+.button{
+  outline: none;
+  background-color: @black;
+  border: 0.1rem solid @black;
+  border-radius: 0.4rem;
+  color:#fff;
+  transition: 0.3s;
+  padding: 1rem 2rem;
+}
+/*Buttons*/
+@heading-name: heading;
+@heading-default-name: h;
+@heading-count: 6;
+
+.generate-heading(@i: 1) when (@i =< @heading-count){
+  .@{heading-name}-@{i}, .@{heading-default-name}-@{i}, h@{i}{
+    font-family: 'Roboto Slab', serif;
+    font-size: 3.4rem - 0.4rem*@i;
+    font-weight: 700;
+  }
+  .generate-heading(@i + 1);
+}
+.generate-heading();
+
+.a-theme{
+  cursor: pointer;
+  &_default{
+    text-decoration: none;
+  }
+  transition: 0.3s;
+  &:hover,&:active,&:focus{
+    color: #7FB3D4;
+  }
+}
+@a-prefix: a-theme;
+@badge-colors: blue @blue, gray @gray, green @green, red @red, black @black;
+
+.make-a(@a-prefix, @badge-colors);
+.make-a(@prefix, @list) {
+  .iter(length(@list));
+  .iter(@i) when (@i > 0) {
+    .iter(@i - 1);
+    @pair:  extract(@list, @i);
+    @key:   extract(@pair, 1);
+    @value: extract(@pair, 2);
+    .@{prefix}-@{key} {
+      color: @value;
+    }
+  }
+}
+/* IMG' s*/
+.img-resp{
+  max-width: 100%;
+}
+/* IMG' s*/
