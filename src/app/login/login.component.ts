@@ -27,19 +27,6 @@ export class LoginComponent implements OnInit {
       ],
     });
   }
-  // passwordValidator(group: FormGroup) {
-  //   let match = false;
-  //   if (group.controls.password === group.controls.repeatPassword) {
-  //     match = true;
-  //   }
-  //   if (match) {
-  //     return null;
-  //   } else {
-  //     return {
-  //       mismatch: true
-  //     };
-  //   }
-  // }
   get myForm() {
     return this.loginForm.controls;
   }

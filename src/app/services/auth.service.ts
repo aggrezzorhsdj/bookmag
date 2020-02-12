@@ -13,6 +13,7 @@ export class AuthService {
     this.http.post(this.api + '/users/authenticate', {login, password})
       .subscribe((resp: any) => {
         this.router.navigate(['profile']);
+        localStorage.setItem('userId', resp.signed_user._id);
         localStorage.setItem('auth_token', resp.token);
       });
   }

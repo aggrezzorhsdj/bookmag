@@ -1,1 +1,30 @@
-<p>profile works!</p>
+<h1>С чего начнем?</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="column-9">
+      <a class="creator-card" routerLink="/profile/edit/{{this.userid}}">
+        <div class="creator-card__inner">
+          <div class="creator-card__title">
+            <fa-icon [icon]="faUser"></fa-icon><span>Редактировать профиль</span>
+          </div>
+          <div class="creator-card__desc">
+            Инструмент редактирования вашего профиля
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="column-9">
+      <a class="creator-card">
+        <div class="creator-card__inner">
+          <div class="creator-card__title">
+            <fa-icon [icon]="faBook"></fa-icon><span>Просмотр книг</span>
+          </div>
+          <div class="creator-card__desc">
+            Редактирование книг в библиотеке
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

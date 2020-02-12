@@ -1,15 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~src/assets/_grid";
+@import "~src/assets/_vars";
 *{
   box-sizing: border-box;
   font-family: Roboto, sans-serif;
-  font-size: 1.6rem;
 }
-
-@blue: #7FB3D4;
-@gray: #767676;
-@green: #8CC079;
-@red: #b35d5d;
-@black: #0e0e0e;
 
 html{
   font-size: 10px;
@@ -17,19 +12,20 @@ html{
 body{
   margin: 0;
   height: 100%;
+  font-size: 1.6rem;
   font-family: Roboto, sans-serif;
 }
 p,a{
   font-size: 1.6rem;
 }
 /*Container*/
-.container{
-  padding: 0 2rem;
+.section{
+  padding: 4rem 2rem 0;
   max-width: 120rem;
   margin: 0 auto;
-}
-.small-container{
+  &_small{
   max-width: 37rem;
+}
 }
 /*Container*/
 /*Form*/
@@ -115,6 +111,47 @@ p,a{
     }
   }
 }
+
+/*Cards*/
+.creator-card{
+  border: @border solid @middle-gray;
+  border-radius: @border-radius;
+  padding: @card-padding;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: @middle-gray;
+  transition: 0.2s ease-in;
+  cursor: pointer;
+  &__title{
+    font-size: 2rem;
+    font-weight: bold;
+    & > fa-icon{
+      margin-right: 2rem;
+    }
+  }
+  &__desc{
+    height: 0;
+    padding-top: 2rem;
+    overflow: hidden;
+    transition: 0.3s ease;
+  }
+  &__icon {
+    text-align: center;
+    & > fa-icon {
+      color: @middle-gray;
+      font-size: 4rem;
+    }
+  }
+  &:hover{
+    background-color: @gray;
+    color: #fff;
+  }
+  &:hover &__desc{
+    height: auto;
+  }
+}
+/*Cards*/
 /* IMG' s*/
 .img-resp{
   max-width: 100%;

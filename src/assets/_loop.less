@@ -1,0 +1,13 @@
+@import "_vars";
+.grid-generate(@counter) when (@counter > 0){
+  @width: (@counter / @cols) * 100;
+  .column-@{counter}{
+    max-width: ~"@{width}%";
+    flex: 0 0 ~"@{width}%";
+  }
+  .col-offset-@{counter} {
+    margin-left: ~"@{width}%";
+  }
+  .grid-generate((@counter - 1));
+}
+

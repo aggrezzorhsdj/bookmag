@@ -1,0 +1,43 @@
+@import "_vars";
+@import "_loop";
+.container {
+  width: @container-width;
+  display: block;
+  margin: auto;
+
+  .row {
+    flex-direction: row;
+
+    &.reverse {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .column {
+    flex-direction: column;
+
+    &.reverse {
+      flex-direction: column-reverse;
+    }
+  }
+
+  .row,
+  .column {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: @gutter;
+    margin-left: @gutter;
+  }
+}
+[class^="column-"] {
+  box-sizing: border-box; // Se to border-box for padding and borders to count as width
+  // Set flex-grow and shrink to 0 so that these columns always have the size we tell them in the loop
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding-right: @gutter / 2; // Set paddings to half the gutter for a little spacing
+  padding-left: @gutter / 2;
+  margin-bottom: 2rem;
+}
+.grid-generate(@cols);
+
