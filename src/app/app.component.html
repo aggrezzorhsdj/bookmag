@@ -14,12 +14,12 @@
         <a class="a-theme nav__navbar__item__link">Канцтовары</a>
       </li>
       <li class="nav__navbar__item nav__navbar__item__search">
-        <form class="form form__search">
           <input class="input input_default input__search" name="main_search" placeholder="Поиск книг"/>
-        </form>
       </li>
       <li class="nav__navbar__item nav__navbar__item">
-        <a class="a-theme a-theme nav__navbar__item__link">Профиль</a>
+
+        <a class="a-theme a-theme nav__navbar__item__link" routerLink="/login">Вход</a>
+        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="authService.logIn" routerLink="/profile">Профиль</a>
       </li>
       <li class="nav__navbar__item nav__navbar__item">
         <a class="a-theme a-theme nav__navbar__item__link">Корзина</a>
@@ -28,6 +28,8 @@
   </nav>
 </header>
 <main>
-
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 </main>
 <footer></footer>
