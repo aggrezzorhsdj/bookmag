@@ -9,6 +9,8 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'Bookmag';
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    console.log(authService.logIn);
+  }
   ngOnInit() {}
 }

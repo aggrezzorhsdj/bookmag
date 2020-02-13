@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./books.component.less']
 })
 export class BooksComponent implements OnInit {
+  title = 'Книги';
 
   constructor() { }
 

@@ -84,16 +84,29 @@ p,a{
   .generate-heading(@i + 1);
 }
 .generate-heading();
-
+a{
+  text-decoration: none;
+  &:visited{
+    color:inherit;
+    text-decoration: none;
+  }
+}
 .a-theme{
   cursor: pointer;
+  text-decoration: none;
+  transition: 0.3s;
   &_default{
     text-decoration: none;
   }
-  transition: 0.3s;
+  &:visited{
+    color:inherit;
+  }
+
   &:hover,&:active,&:focus{
     color: #7FB3D4;
+    text-decoration: none;
   }
+
 }
 @a-prefix: a-theme;
 @badge-colors: blue @blue, gray @gray, green @green, red @red, black @black;
@@ -131,10 +144,10 @@ p,a{
     }
   }
   &__desc{
-    height: 0;
+    max-height: 0;
     padding-top: 2rem;
     overflow: hidden;
-    transition: 0.3s ease;
+    transition: 0.4s ease-in;
   }
   &__icon {
     text-align: center;
@@ -146,9 +159,12 @@ p,a{
   &:hover{
     background-color: @gray;
     color: #fff;
+    & > *{
+      color: #fff;
+    }
   }
   &:hover &__desc{
-    height: auto;
+    max-height: 50rem;
   }
 }
 /*Cards*/

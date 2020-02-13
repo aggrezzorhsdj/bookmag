@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {GetdataService} from '../../services/getdata.service';
 import { User } from '../../models/user';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-profileedit',
-  templateUrl: './profileedit.component.html',
-  styleUrls: ['./profileedit.component.less']
+  selector: 'app-profile-edit',
+  templateUrl: './profile-edit.component.html',
+  styleUrls: ['./profile-edit.component.less']
 })
-export class ProfileeditComponent implements OnInit {
+export class ProfileEditComponent implements OnInit {
   userId: string = localStorage.getItem('userId');
   userData: User;
   userUpdate: User;

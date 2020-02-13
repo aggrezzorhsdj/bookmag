@@ -9,9 +9,10 @@ const express = require('express'),
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.db, {
+mongoose.connect(dbConfig.dbremote, {
+  useUnifiedTopology: true,
   useNewUrlParser: true
-}).then(() => {
+  }).then(() => {
     console.log('Database sucessfully connected')
   },
   error => {

@@ -18,7 +18,7 @@ export class AuthService {
       });
   }
   public logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('auth_token');
   }
   public get logIn(): boolean {
     return (localStorage.getItem('auth_token') !== null);
