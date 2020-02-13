@@ -32,33 +32,50 @@ p,a{
 @input-bg: #d4d4d4;
 @input-border: #d4d4d4;
 .form{
-  &__search{
-    width: 100%;
-  }
+
   &__group{
     margin-bottom: 2rem;
+    position: relative;
+  }
+  &__input{
+    outline: none;
+    border: 0.1rem solid @input-border;
+    padding: 2rem;
+    color:#000;
+    border-radius: 0.4rem;
+    background-color: @input-bg;
+    transition: 0.3s;
+    display: block;
+    width: 100%;
+    &:focus,&:active,&:hover{
+      background: transparent;
+      box-shadow: 0 0 0 0.3rem rgba(212, 212, 212, 0.45);
+    }
+    &__search{
+      width: 100%;
+      padding: 1rem;
+    }
+    & ~ label{
+      position: absolute;
+      left: 2rem;
+      top: 0;
+      font-size: 1rem;
+      color: @gray;
+      transform: translateY(40%);
+      opacity: 1;
+      transition: 0.3s;
+    }
+    &:placeholder-shown ~ label{
+      transform: translateY(20%);
+      opacity: 0;
+    }
   }
 }
 .invalid-control{
   padding: 1rem 0;
   color:@red;
 }
-.input{
-  outline: none;
-  border: 0.1rem solid @input-border;
-  padding: 1rem;
-  color:#000;
-  border-radius: 0.4rem;
-  background-color: @input-bg;
-  transition: 0.3s;
-  &:focus,&:active,&:hover{
-    background: transparent;
-    box-shadow: 0 0 0 0.3rem rgba(212, 212, 212, 0.45);
-  }
-  &__search{
-    width: 100%;
-  }
-}
+
 /*Form*/
 /*Buttons*/
 .button{
@@ -136,6 +153,7 @@ a{
   background: @middle-gray;
   transition: 0.2s ease-in;
   cursor: pointer;
+  color:#000;
   &__title{
     font-size: 2rem;
     font-weight: bold;

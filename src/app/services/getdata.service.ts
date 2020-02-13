@@ -25,12 +25,13 @@ export class GetdataService {
       catchError(this.errorMgmt)
     );
   }
-  updateUser(id: string, data: User): Observable<any> {
-    const url = `${this.api}/users/add/${id}`;
-    return this.http.put(url, data, {headers: this.headers})
-      .pipe(
-        catchError(this.errorMgmt)
-      );
+  updateUser(id: string, data: User) {
+    const url = `${this.api}/users/update/${id}`;
+    this.http.post(url, data)
+      .subscribe((resp: any) => {
+        console.log(resp);
+        this.router.navigate(['profile']);
+      });
   }
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';

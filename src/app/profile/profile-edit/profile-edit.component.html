@@ -1,10 +1,52 @@
 <h1>Редактирование профиля</h1>
-<div>
-  {{userData?.id}}
-</div>
-<div>
-  {{userData?.login}}
-</div>
-<div>
-  {{userData?.email}}
+<div class="profile-edit">
+  <div class="profile-edit__inner">
+    <form [formGroup]="userEditForm" class="form" (submit)="onSubmit()">
+      <div class="row">
+        <div class="column-12">
+          <div class="form__group">
+            <input type="text" class="form__input" id="login" formControlName="login">
+            <label for="login">Логин</label>
+            <div class="invalid-control" *ngIf="submitted && myForm.login.errors?.required">
+              Введите логин
+            </div>
+          </div>
+        </div>
+        <div class="column-12">
+          <div class="form__group">
+            <input type="text" class="form__input" id="email" formControlName="email">
+            <label for="email">Email</label>
+            <div class="invalid-control" *ngIf="submitted && myForm.email.errors?.required">
+              Введите Email
+            </div>
+          </div>
+        </div>
+        <div class="" formGroupName="passwordGroup">
+          <div class="column-12">
+            <div class="form__group">
+              <input type="password" class="form__input" id="password" formControlName="password">
+              <label for="password">Пароль</label>
+              <div class="invalid-control" *ngIf="submitted && this.userEditForm.get('passwordGroup').hasError('required') && submitted">
+                Введите пароль
+              </div>
+            </div>
+          </div>
+          <div class="column-12">
+            <div class="form__group">
+              <input type="password" class="form__input" id="repeatPassword" formControlName="repeatPassword">
+              <label for="repeatPassword">Повторите пароль</label>
+
+              <div class="invalid-control" *ngIf="submitted && this.userEditForm.get('passwordGroup').hasError('notMatch') && this.userEditForm.get('passwordGroup').touched">
+                Введите пароль
+              </div>
+            </div>
+          </div>
+          <div class="column-12">
+            <button class="button" type="submit">Сохранить</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
 </div>
