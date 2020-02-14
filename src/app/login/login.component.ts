@@ -11,7 +11,7 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent implements OnInit {
   submitted = false;
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.mainForm();
   }
   ngOnInit() {
@@ -37,7 +37,13 @@ export class LoginComponent implements OnInit {
       return false;
     } else {
       console.log(this.loginForm.get('login').value);
-      this.authService.login(this.loginForm.get('login').value, this.loginForm.get('password').value);
+      this.authService.login(this.loginForm.get('login').value, this.loginForm.get('password').value)
+        .subscribe((resp) => {
+          this.router.navigate(['profile']);
+          console.log(resp);
+          localStorage.setItem('userId', resp.id);
+          localStorage.setItem('auth_token', resp.token);
+        });
     }
   }
 }

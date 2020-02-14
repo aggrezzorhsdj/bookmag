@@ -8,14 +8,14 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {ReactiveFormsModule} from '@angular/forms';
 
 const appRoute: Routes = [
-  {path: '', component: MainComponent},
+  {path: '', component: MainComponent, pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},
   {path: 'books', loadChildren: './books/books.module#BooksModule'},
   {path: '**', component: PageNotFoundComponent},
 ];
 
-
+const s = '';
 @NgModule({
   declarations: [
     MainComponent,

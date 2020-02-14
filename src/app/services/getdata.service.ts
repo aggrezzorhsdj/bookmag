@@ -16,12 +16,9 @@ export class GetdataService {
   userId: string = localStorage.getItem('userId');
   token: string = localStorage.getItem('auth_token');
   constructor(private http: HttpClient, private router: Router) {}
-  getUser(id): Observable<any> {
+  getUser(id): Observable<User> {
     const url = `${this.api}/users/read/${id}`;
-    return this.http.get(url, {headers: this.headers}).pipe(
-      map((res: Response) => {
-        return res || {};
-      }),
+    return this.http.get<User>(url, {headers: this.headers}).pipe(
       catchError(this.errorMgmt)
     );
   }

@@ -53,7 +53,7 @@ export class ProfileEditComponent implements OnInit {
     this.getData.getUser(this.userId)
       .subscribe((data) => {
         this.userData = {
-          id: data._id,
+          id: data.id,
           login: data.login,
           email: data.email,
           password: data.password,
@@ -84,7 +84,7 @@ export class ProfileEditComponent implements OnInit {
     this.getData.getUser(this.userId)
       .subscribe((data) => {
         this.userData = {
-          id: data._id,
+          id: data.id,
           login: data.login,
           email: data.email,
           password: data.password,

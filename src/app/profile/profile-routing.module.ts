@@ -5,7 +5,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 
 const routes: Routes = [
-  {path: '', component: ProfileComponent},
+  {path: '', component: ProfileComponent, pathMatch: 'full'},
   {path: 'edit/:id', loadChildren: './profile-edit/profile-edit.module#ProfileEditModule'}
 ];
 

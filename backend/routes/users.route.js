@@ -19,7 +19,9 @@ usersRoute.route('/authenticate').post((req, res, next) => {
         console.log(data);
         let token = jwt.sign(data.login+data.password, config.secret);
         res.status(200).send({
-          signed_user: data,
+          id: data._id,
+          login: data.login,
+          password: data.password,
           token: token
         });
       } else {
