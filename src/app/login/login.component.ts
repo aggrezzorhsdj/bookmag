@@ -43,7 +43,8 @@ export class LoginComponent implements OnInit {
           console.log(resp);
           localStorage.setItem('userId', resp.id);
           localStorage.setItem('auth_token', resp.token);
-        });
+        })
+        .unsubscribe();
     }
   }
 }
