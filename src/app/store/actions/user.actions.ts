@@ -1,5 +1,4 @@
 import {Action} from '@ngrx/store';
-import {IUserState} from '../state/user.state';
 import {IUser} from '../../interfaces/user.interface';
 
 export enum EUserActions {
@@ -15,15 +14,17 @@ export class GetUsers implements Action {
 
 export class GetUsersSuccess implements Action {
   public readonly type = EUserActions.GetUsersSuccess;
-  constructor(private payload: IUser[]) {}
+  constructor(public payload: IUser[]) {}
 }
 
 export class GetUser implements Action {
-  constructor(private payload: IUser) {}
+  constructor(public payload: IUser) {}
   public readonly type = EUserActions.GetUser;
 }
 
 export class GetUserSuccess implements Action {
   public readonly type = EUserActions.GetUserSuccess;
-  constructor(private payload: IUser) {}
+  constructor(public payload: IUser) {}
 }
+
+export type UserActions = GetUsers | GetUsersSuccess | GetUser | GetUserSuccess;
