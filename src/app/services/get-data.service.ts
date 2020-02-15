@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
-import {HttpClientModule, HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-
-import { User } from '../models/user';
+import {IUser} from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GetdataService {
+export class GetDataService {
   api = 'http://localhost:4000/api';
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   userId: string = localStorage.getItem('userId');
   token: string = localStorage.getItem('auth_token');
   constructor(private http: HttpClient, private router: Router) {}
-  getUser(id): Observable<User> {
+  getUser(id): Observable<IUser> {
     const url = `${this.api}/users/read/${id}`;
-    return this.http.get<User>(url, {headers: this.headers}).pipe(
+    return this.http.get<IUser>(url, {headers: this.headers}).pipe(
       catchError(this.errorMgmt)
     );
   }
-  updateUser(id: string, data: User) {
+  updateUser(id: string, data: IUser) {
     const url = `${this.api}/users/update/${id}`;
     this.http.post(url, data)
       .subscribe((resp: any) => {

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {GetdataService} from '../../services/getdata.service';
+import {GetDataService} from '../../services/getdata.service';
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-profile-edit',
@@ -33,7 +33,7 @@ export class ProfileEditComponent implements OnInit {
     }, {validator: this.passwordMatcher})
   });
   submitted = false;
-  constructor(private fb: FormBuilder, private authService: AuthService, private getData: GetdataService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private getData: GetDataService, private router: Router) {
     this.readUser();
   }
   passwordMatcher(group: FormGroup) {

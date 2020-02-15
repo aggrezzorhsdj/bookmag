@@ -10,26 +10,22 @@ import {IAppState} from "../state/app.state";
 
 import {GetUserSuccess, GetUsersSuccess, GetUser, GetUsers, EUserActions, } from "../actions/user.actions";
 
-import {AuthService} from "../../services/auth.service";
-import {GetdataService} from "../../services/getdata.service";
-import {User} from "../../models/user";
-import {selectUserList} from "";
+import {GetDataService} from '../../services/get-data.service';
+import {selectUserList} from '../selectors/user.selectors';
+import {IUser} from '../../interfaces/user.interface';
+
 
 @Injectable()
 export class UserEffects {
   @Effect()
-  getUsers$ = this.action$.pipe(
+  getUser$ = this.actions$.pipe(
     ofType<GetUser>(EUserActions.GetUser),
-    map(action => action.payload),
-    withLatestFrom(this.store.pipe(select(selectUserList))),
-    switchMap(([id, users]) => {
-      const selectedUser = users.filter(user => user.id === +id)[0];
-      return of(new GetUserSuccess(selectedUser));
-    })
+    switchMap((id) => this.getData.getUser(id)),
+    switchMap((userHttp: IUser) => of(new GetUserSuccess(userHttp)))
   );
   constructor(
-    private action$: Actions,
-    private getData: GetdataService,
+    private actions$: Actions,
+    private getData: GetDataService,
     private store: Store<IAppState>
   ) {
   }
