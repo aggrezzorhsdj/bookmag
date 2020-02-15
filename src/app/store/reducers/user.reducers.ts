@@ -18,6 +18,12 @@ export const userReducers = (
         selectedUser: action.payload
       };
     }
+    case EUserActions.UpdateUserSuccess: {
+      return {
+        ...state,
+        selectedUser: action.payload
+      };
+    }
     default:
       return state;
   }

@@ -5,7 +5,11 @@ import { Router } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {IAppState} from '../../store/state/app.state';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
+import {GetUser} from '../../store/actions/user.actions';
+import {selectSelectedUser} from '../../store/selectors/user.selectors';
+import {IUser} from "../../interfaces/user.interface";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-profile-edit',
@@ -15,7 +19,6 @@ import {Store} from '@ngrx/store';
 export class ProfileEditComponent implements OnInit {
   userId: string = localStorage.getItem('userId');
   userData: User;
-  userUpdate: User;
   userEditForm: FormGroup = this.fb.group({
     login: ['', [Validators.required]],
     email: ['', [Validators.required]],
@@ -82,32 +85,25 @@ export class ProfileEditComponent implements OnInit {
         login: this.userEditForm.get('login').value,
         email: this.userEditForm.get('email').value,
         password: this.userEditForm.get('passwordGroup').get('password').value,
-      }
+      };
       this.getData.updateUser(this.userId, data);
     }
   }
   ngOnInit() {
+    this.store.dispatch(new GetUser(this.userId));
   }
   readUser() {
-    this.getData.getUser(this.userId)
-      .subscribe((data) => {
-        this.userData = {
-          id: data.id,
-          login: data.login,
-          email: data.email,
-          password: data.password,
-        };
+    this.store.pipe<IUser>(select(selectSelectedUser)).subscribe(
+      user => {
         this.userEditForm.patchValue({
-          login: this.userData.login,
-          email: this.userData.email,
+          login: user.login,
+          email: user.email,
           passwordGroup: {
-            password: this.userData.password,
-            repeatPassword: this.userData.password,
+            password: user.password,
+            repeatPassword: user.password,
           }
         });
-      });
-  }
-  updateUser() {
-    this.getData.updateUser(this.userId, this.userUpdate);
+      }
+    );
   }
 }
