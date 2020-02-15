@@ -8,7 +8,15 @@ import {switchMap, map, withLatestFrom} from "rxjs/operators";
 
 import {IAppState} from '../state/app.state';
 
-import {GetUserSuccess, GetUsersSuccess, GetUser, GetUsers, EUserActions, UpdateUser,} from '../actions/user.actions';
+import {
+  GetUserSuccess,
+  GetUsersSuccess,
+  GetUser,
+  GetUsers,
+  EUserActions,
+  UpdateUser,
+  UpdateUserSuccess,
+} from '../actions/user.actions';
 
 import {GetDataService} from '../../services/get-data.service';
 import {selectUserList} from '../selectors/user.selectors';
@@ -25,8 +33,8 @@ export class UserEffects {
   );
   updateUser$ = this.actions$.pipe(
     ofType<UpdateUser>(EUserActions.UpdateUser),
-    switchMap((id) => this.getData.getUser(id)),
-    switchMap((userHttp: IUser) => of(new GetUserSuccess(userHttp)))
+    map((data) => this.getData.updateUser(data)),
+    switchMap(res => of(new UpdateUserSuccess()))
   );
   constructor(
     private actions$: Actions,

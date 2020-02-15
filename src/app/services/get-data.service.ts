@@ -21,8 +21,8 @@ export class GetDataService {
       catchError(this.errorMgmt)
     );
   }
-  updateUser(id: string, data: IUser) {
-    const url = `${this.api}/users/update/${id}`;
+  updateUser(data) {
+    const url = `${this.api}/users/update/${data.id}`;
     this.http.post(url, data)
       .subscribe((resp: any) => {
         console.log(resp);
