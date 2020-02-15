@@ -6,7 +6,7 @@ import {Store, select} from "@ngrx/store";
 import { of } from 'rxjs';
 import {switchMap, map, withLatestFrom} from "rxjs/operators";
 
-import {IAppState} from "../state/app.state";
+import {IAppState} from '../state/app.state';
 
 import {GetUserSuccess, GetUsersSuccess, GetUser, GetUsers, EUserActions, } from "../actions/user.actions";
 
