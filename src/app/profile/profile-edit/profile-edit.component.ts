@@ -14,7 +14,6 @@ import {GetUser, UpdateUser} from '../../store/actions/user.actions';
   selector: 'app-profile-edit',
   templateUrl: './profile-edit.component.html',
   styleUrls: ['./profile-edit.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileEditComponent implements OnInit {
   userId: string = localStorage.getItem('userId');
@@ -72,7 +71,6 @@ export class ProfileEditComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
-    console.log(this.userEditForm.valid);
     if (!this.userEditForm.valid) {
       return false;
     } else {
@@ -86,8 +84,8 @@ export class ProfileEditComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.readUser();
     this.store.dispatch(new GetUser(this.userId));
+    this.readUser();
   }
   readUser() {
     this.store.pipe<IUser>(select(selectSelectedUser)).subscribe(

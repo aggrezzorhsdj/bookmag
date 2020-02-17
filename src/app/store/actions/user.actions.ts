@@ -31,7 +31,7 @@ export class GetUserSuccess implements Action {
 
 export class UpdateUser implements Action {
   public readonly type = EUserActions.UpdateUser;
-  constructor(private payload: IUser) {}
+  constructor(public payload: IUser) {}
 }
 
 export class UpdateUserSuccess implements Action {
