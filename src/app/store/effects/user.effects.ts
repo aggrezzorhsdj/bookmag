@@ -4,7 +4,7 @@ import { Effect, ofType, Actions} from "@ngrx/effects";
 import {Store, select} from "@ngrx/store";
 
 import { of } from 'rxjs';
-import {switchMap, map, withLatestFrom} from "rxjs/operators";
+import {switchMap, map, withLatestFrom, catchError} from "rxjs/operators";
 
 import {IAppState} from '../state/app.state';
 
@@ -15,7 +15,7 @@ import {
   GetUsers,
   EUserActions,
   UpdateUser,
-  UpdateUserSuccess,
+  UpdateUserSuccess, UpdateUserError,
 } from '../actions/user.actions';
 
 import {GetDataService} from '../../services/get-data.service';
@@ -34,8 +34,14 @@ export class UserEffects {
   @Effect()
   updateUser$ = this.actions$.pipe(
     ofType<UpdateUser>(EUserActions.UpdateUser),
-    switchMap((data) => this.getData.updateUser(data)),
-    switchMap((res: IUser) => of(new UpdateUserSuccess(res)))
+    switchMap((data) => {
+      return this.getData.updateUser(data).pipe(
+        map((res) => {
+          return new UpdateUserSuccess();
+        }),
+        catchError(error => of(new UpdateUserError(error)))
+      );
+    })
   );
   constructor(
     private actions$: Actions,

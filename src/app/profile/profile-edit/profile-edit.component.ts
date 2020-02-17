@@ -80,6 +80,7 @@ export class ProfileEditComponent implements OnInit {
         email: this.userEditForm.get('email').value,
         password: this.userEditForm.get('passwordGroup').get('password').value,
       };
+      console.log(data);
       this.store.dispatch(new UpdateUser(data));
     }
   }

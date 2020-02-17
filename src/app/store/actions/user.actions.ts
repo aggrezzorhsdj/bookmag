@@ -8,6 +8,7 @@ export enum EUserActions {
   GetUserSuccess = '[User] Get user success',
   UpdateUser = '[User] Update user',
   UpdateUserSuccess = '[User] Update user success',
+  UpdateUserError = '[User] Update user error',
 }
 
 export class GetUsers implements Action {
@@ -36,7 +37,10 @@ export class UpdateUser implements Action {
 
 export class UpdateUserSuccess implements Action {
   public readonly type = EUserActions.UpdateUserSuccess;
-  constructor(public payload: IUser) {}
 }
 
-export type UserActions = GetUsers | GetUsersSuccess | GetUser | GetUserSuccess | UpdateUser | UpdateUserSuccess;
+export class UpdateUserError implements Action {
+  public readonly type = EUserActions.UpdateUserError;
+  constructor(public payload: string) {}
+}
+export type UserActions = GetUsers | GetUsersSuccess | GetUser | GetUserSuccess | UpdateUser | UpdateUserSuccess | UpdateUserError;
