@@ -30,13 +30,13 @@ export class GetUserSuccess implements Action {
 }
 
 export class UpdateUser implements Action {
-  constructor(public payload: IUser) {}
   public readonly type = EUserActions.UpdateUser;
+  constructor(private payload: IUser) {}
 }
 
 export class UpdateUserSuccess implements Action {
-  constructor(public payload: IUser) {}
   public readonly type = EUserActions.UpdateUserSuccess;
+  constructor(public payload: IUser) {}
 }
 
 export type UserActions = GetUsers | GetUsersSuccess | GetUser | GetUserSuccess | UpdateUser | UpdateUserSuccess;

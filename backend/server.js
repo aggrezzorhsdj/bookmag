@@ -11,8 +11,9 @@ const express = require('express'),
 mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.dbremote, {
   useUnifiedTopology: true,
-  useNewUrlParser: true
-  }).then(() => {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+}).then(() => {
     console.log('Database sucessfully connected')
   },
   error => {

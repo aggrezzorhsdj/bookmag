@@ -23,8 +23,8 @@ export class GetDataService {
     );
   }
   updateUser(data): Observable<IUser> {
-    const url = `${this.api}/users/update/${data.id}`;
-    return this.http.post<IUser>(url, data);
+    const url = `${this.api}/users/update/${data.payload.id}`;
+    return this.http.post<IUser>(url, data.payload);
   }
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';

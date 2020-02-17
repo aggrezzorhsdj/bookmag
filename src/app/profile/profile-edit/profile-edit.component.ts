@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {GetDataService} from '../../services/get-data.service';
-import { User } from '../../models/user';
-import { Router } from '@angular/router';
+import {User} from '../../models/user';
+import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {IAppState} from '../../store/state/app.state';
 import {select, Store} from '@ngrx/store';
-import {GetUser, UpdateUser} from '../../store/actions/user.actions';
 import {selectSelectedUser} from '../../store/selectors/user.selectors';
-import {IUser} from "../../interfaces/user.interface";
-import {Observable} from "rxjs";
+import {IUser} from '../../interfaces/user.interface';
+import {GetUser, UpdateUser} from '../../store/actions/user.actions';
 
 @Component({
   selector: 'app-profile-edit',
   templateUrl: './profile-edit.component.html',
-  styleUrls: ['./profile-edit.component.less']
+  styleUrls: ['./profile-edit.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileEditComponent implements OnInit {
   userId: string = localStorage.getItem('userId');
@@ -44,14 +44,10 @@ export class ProfileEditComponent implements OnInit {
     private getData: GetDataService,
     private store: Store<IAppState>,
     private router: Router
-  ) {
-    this.readUser();
-  }
+  ) {}
   passwordMatcher(group: FormGroup) {
     const password = group.get('password').value;
     const repeatPassword = group.get('repeatPassword').value;
-    console.log(password);
-    console.log(repeatPassword);
     if (password === repeatPassword) {
       return null;
     } else {
@@ -90,20 +86,23 @@ export class ProfileEditComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.readUser();
     this.store.dispatch(new GetUser(this.userId));
   }
   readUser() {
     this.store.pipe<IUser>(select(selectSelectedUser)).subscribe(
       user => {
         console.dir(user);
-        this.userEditForm.patchValue({
-          login: user.login,
-          email: user.email,
-          passwordGroup: {
-            password: user.password,
-            repeatPassword: user.password,
-          }
-        });
+        if (user !== null) {
+          this.userEditForm.patchValue({
+            login: user.login,
+            email: user.email,
+            passwordGroup: {
+              password: user.password,
+              repeatPassword: user.password,
+            }
+          });
+        }
       }
     );
   }
