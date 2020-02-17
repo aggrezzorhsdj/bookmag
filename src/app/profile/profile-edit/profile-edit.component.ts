@@ -6,7 +6,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {IAppState} from '../../store/state/app.state';
 import {select, Store} from '@ngrx/store';
-import {GetUser} from '../../store/actions/user.actions';
+import {GetUser, UpdateUser} from '../../store/actions/user.actions';
 import {selectSelectedUser} from '../../store/selectors/user.selectors';
 import {IUser} from "../../interfaces/user.interface";
 import {Observable} from "rxjs";
@@ -80,13 +80,13 @@ export class ProfileEditComponent implements OnInit {
     if (!this.userEditForm.valid) {
       return false;
     } else {
-      const data = {
+      const data: IUser = {
         id: this.userId,
         login: this.userEditForm.get('login').value,
         email: this.userEditForm.get('email').value,
         password: this.userEditForm.get('passwordGroup').get('password').value,
       };
-      this.getData.updateUser(this.userId, data);
+      this.store.dispatch(new UpdateUser(data));
     }
   }
   ngOnInit() {
@@ -95,6 +95,7 @@ export class ProfileEditComponent implements OnInit {
   readUser() {
     this.store.pipe<IUser>(select(selectSelectedUser)).subscribe(
       user => {
+        console.dir(user);
         this.userEditForm.patchValue({
           login: user.login,
           email: user.email,

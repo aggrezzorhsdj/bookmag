@@ -45,9 +45,10 @@ usersRoute.route('/').get((req, res) => {
 })
 //
 // Get single Users
-usersRoute.route('/read/:id').get((req, res) => {
-  Users.findById(req.params.id, (error, data) => {
+usersRoute.route('/read/:id').get((req, res, next) => {
+  Users.findOne({_id: req.params.id}, (error, data) => {
     if (error) {
+
       return next(error)
     } else {
       res.json(data)

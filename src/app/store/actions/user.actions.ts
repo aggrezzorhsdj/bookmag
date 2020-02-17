@@ -30,11 +30,12 @@ export class GetUserSuccess implements Action {
 }
 
 export class UpdateUser implements Action {
-  constructor(public payload: string) {}
+  constructor(public payload: IUser) {}
   public readonly type = EUserActions.UpdateUser;
 }
 
 export class UpdateUserSuccess implements Action {
+  constructor(public payload: IUser) {}
   public readonly type = EUserActions.UpdateUserSuccess;
 }
 

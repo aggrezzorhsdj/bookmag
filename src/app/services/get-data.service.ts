@@ -16,18 +16,15 @@ export class GetDataService {
   token: string = localStorage.getItem('auth_token');
   constructor(private http: HttpClient, private router: Router) {}
   getUser(id): Observable<IUser> {
-    const url = `${this.api}/users/read/${id}`;
+    console.log(id.payload);
+    const url = `${this.api}/users/read/${id.payload}`;
     return this.http.get<IUser>(url, {headers: this.headers}).pipe(
       catchError(this.errorMgmt)
     );
   }
-  updateUser(data) {
+  updateUser(data): Observable<IUser> {
     const url = `${this.api}/users/update/${data.id}`;
-    this.http.post(url, data)
-      .subscribe((resp: any) => {
-        console.log(resp);
-        this.router.navigate(['profile']);
-      });
+    return this.http.post<IUser>(url, data);
   }
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';
