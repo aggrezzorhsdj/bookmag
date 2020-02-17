@@ -22,11 +22,11 @@ export class GetDataService {
       catchError(this.errorMgmt)
     );
   }
-  updateUser(data){
+  updateUser(data) {
     console.log(data.payload);
     const url = `${this.api}/users/update/${data.payload.id}`;
     return this.http.post(url, data.payload).pipe(
-      map((res) => console.log(res)),
+      map((res) => res),
       catchError(this.errorMgmt)
     );
   }

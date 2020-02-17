@@ -64,7 +64,7 @@ usersRoute.route('/update/:id').post((req, res, next) => {
       console.log(error);
       return next(error);
     } else {
-      res.send('ok');
+      res.send({status: 'ok'});
     }
   })
 })
