@@ -59,12 +59,12 @@ usersRoute.route('/read/:id').get((req, res, next) => {
 //
 // Update Users
 usersRoute.route('/update/:id').post((req, res, next) => {
-  Users.findByIdAndUpdate(req.params.id, {$set: req.body}, (error, data) => {
+  Users.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}, (error, data) => {
     if (error) {
       console.log(error);
       return next(error);
     } else {
-      res.send({status: 'ok'});
+      res.json();
     }
   })
 })

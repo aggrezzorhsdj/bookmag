@@ -37,6 +37,7 @@ export class UpdateUser implements Action {
 
 export class UpdateUserSuccess implements Action {
   public readonly type = EUserActions.UpdateUserSuccess;
+  constructor(public payload: IUser) {}
 }
 
 export class UpdateUserError implements Action {
