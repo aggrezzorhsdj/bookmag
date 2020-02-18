@@ -5,6 +5,9 @@ export enum EProductActions {
   GetProducts = '[Products] Get products',
   GetProductsSuccess = '[Products] Get products success',
   GetProductsError = '[Products] Get products success',
+  CreateProduct = '[Products] Get products',
+  CreateProductSuccess = '[Products] Get products success',
+  CreateProductError = '[Products] Get products success',
   GetProduct = '[Product] Get product',
   GetProductSuccess = '[Product] Get product success',
   GetProductError = '[Product] Get product success',
@@ -14,6 +17,21 @@ export enum EProductActions {
   RemoveProduct = '[Product] Remove product',
   RemoveProductSuccess = '[Product] Remove product success',
   RemoveProductError = '[Product] Remove product success',
+}
+
+export class CreateProduct implements Action {
+  public readonly type = EProductActions.CreateProduct;
+  constructor(public payload: IProduct) {}
+}
+
+export class CreateProductSuccess implements Action {
+  public readonly type = EProductActions.CreateProductSuccess;
+  constructor(public payload: IProduct) {}
+}
+
+export class CreateProductError implements Action {
+  public readonly type = EProductActions.CreateProductError;
+  constructor(public payload: IProduct) {}
 }
 
 export class GetProducts implements Action {
@@ -76,4 +94,4 @@ export class RemoveProductError implements Action {
 }
 
 
-export type ProductActions = GetProducts |  GetProductsSuccess | GetProductsError | GetProduct |  GetProductSuccess | GetProductError | UpdateProduct |  UpdateProductSuccess | UpdateProductError | RemoveProduct |  RemoveProductSuccess | RemoveProductError;
+export type ProductActions = GetProducts |  GetProductsSuccess | GetProductsError | GetProduct |  GetProductSuccess | GetProductError | CreateProduct |  CreateProductSuccess | CreateProductError;;

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Product = new Schema({
-  name: {
+  title: {
     type: String,
     required: true,
     maxlength: 30
@@ -10,9 +10,17 @@ const Product = new Schema({
   article:{
     type: String,
     required: true,
-    maxlength: 8
+    maxlength: 20
+  },
+  description:{
+    type: String,
+    maxlength: 50
   },
   price:{
+    type: Number,
+    default: 0
+  },
+  old_price:{
     type: Number,
     default: 0
   },

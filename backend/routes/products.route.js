@@ -11,6 +11,7 @@ productsRoute.route('/create').post((req, res, next) => {
     if (error) {
       return next(error)
     } else {
+
       res.json(data)
     }
   })
@@ -28,7 +29,7 @@ productsRoute.route('/').get((req, res) => {
 })
 
 // Get single Products
-productsRoute.route('/read/:id').get((req, res) => {
+productsRoute.route('/read/:id').get((req, res, next) => {
   Products.findById(req.params.id, (error, data) => {
     if (error) {
       return next(error)
@@ -40,15 +41,15 @@ productsRoute.route('/read/:id').get((req, res) => {
 
 
 // Update Products
-productsRoute.route('/update/:id').put((req, res, next) => {
-  Products.findByIdAndUpdate(req.params.id, {
-    $set: req.body
-  }, (error, data) => {
+productsRoute.route('/update/:id').post((req, res, next) => {
+  Products.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}, (error, data) => {
     if (error) {
       console.log(error);
       return next(error);
     } else {
       res.json(data)
+      console.log(req.body)
+      console.log(data)
       console.log('Data updated successfully')
     }
   })

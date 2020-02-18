@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {IUser} from '../interfaces/user.interface';
+import {IProduct} from "../interfaces/product.interface";
+import {IProductHttp} from "../interfaces/user-http.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +24,8 @@ export class GetDataService {
       catchError(this.errorMgmt)
     );
   }
-  updateUser(data) {
-    console.log(data.payload);
-    const url = `${this.api}/users/update/${data.payload.id}`;
+  updateData(data, entity) {
+    const url = `${this.api}/${entity}/update/${data.payload.id}`;
     return this.http.post(url, data.payload).pipe(
       map((res) => res),
       catchError(this.errorMgmt)
@@ -42,4 +43,23 @@ export class GetDataService {
     console.log(errorMessage);
     return throwError(errorMessage);
   }
+  getProduct(id): Observable<IProduct> {
+    const url = `${this.api}/products/read/${id}`;
+    return this.http.get<IProduct>(url, {headers: this.headers}).pipe(
+        catchError(this.errorMgmt)
+    );
+  }
+  getProducts(): Observable<IProduct[]> {
+    const url = `${this.api}/products`;
+    return this.http.get<IProduct[]>(url, {headers: this.headers}).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+    createData(data: IProduct, entity: string) {
+      const url = `${this.api}/${entity}/create/`;
+      return this.http.post(url, data).pipe(
+          catchError(this.errorMgmt)
+      );
+    }
 }

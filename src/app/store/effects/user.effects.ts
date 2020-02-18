@@ -35,7 +35,7 @@ export class UserEffects {
   updateUser$ = this.actions$.pipe(
     ofType<UpdateUser>(EUserActions.UpdateUser),
     switchMap((data) => {
-      return this.getData.updateUser(data).pipe(
+      return this.getData.updateData(data, 'users').pipe(
         map((res: IUser) => new UpdateUserSuccess(res)),
         catchError(error => of(new UpdateUserError(error)))
       );
