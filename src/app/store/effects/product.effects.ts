@@ -36,9 +36,12 @@ export class ProductEffects {
     ofType<GetProduct>(EProductActions.GetProduct),
     map(action => action.payload),
     switchMap(id => {
-      return this.store.pipe(select(selectSelectedProduct(id)));
+      console.log(id);
+      return this.getData.getProduct(id);
     }),
-    switchMap((product: IProduct) => of(new GetProductSuccess(product)))
+    switchMap((product: IProduct) => {
+      return of(new GetProductSuccess(product));
+    })
   );
   @Effect()
   getProducts$ = this.actions$.pipe(

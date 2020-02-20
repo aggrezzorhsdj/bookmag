@@ -9,7 +9,7 @@ export const selectProductList = createSelector(
     (state: IProductState) => state.products
 )
 
-export const selectSelectedProduct = (id: string) => createSelector(
+export const selectSelectedProduct = createSelector(
     selectProducts,
-  (state: IProductState) => state.products.map(product => product[id])
+  (state: IProductState) => state.selectedProduct
 )
