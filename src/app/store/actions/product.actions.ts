@@ -5,33 +5,18 @@ export enum EProductActions {
   GetProducts = '[Products] Get products',
   GetProductsSuccess = '[Products] Get products success',
   GetProductsError = '[Products] Get products success',
-  CreateProduct = '[Products] Get products',
-  CreateProductSuccess = '[Products] Get products success',
-  CreateProductError = '[Products] Get products success',
   GetProduct = '[Product] Get product',
   GetProductSuccess = '[Product] Get product success',
   GetProductError = '[Product] Get product success',
+  CreateProduct = '[Products] Create products',
+  CreateProductSuccess = '[Products] Create products success',
+  CreateProductError = '[Products] Create products success',
   UpdateProduct = '[Product] Update product',
   UpdateProductSuccess = '[Product] Update product success',
   UpdateProductError = '[Product] Update product success',
   RemoveProduct = '[Product] Remove product',
   RemoveProductSuccess = '[Product] Remove product success',
   RemoveProductError = '[Product] Remove product success',
-}
-
-export class CreateProduct implements Action {
-  public readonly type = EProductActions.CreateProduct;
-  constructor(public payload: IProduct) {}
-}
-
-export class CreateProductSuccess implements Action {
-  public readonly type = EProductActions.CreateProductSuccess;
-  constructor(public payload: IProduct) {}
-}
-
-export class CreateProductError implements Action {
-  public readonly type = EProductActions.CreateProductError;
-  constructor(public payload: IProduct) {}
 }
 
 export class GetProducts implements Action {
@@ -62,6 +47,22 @@ export class GetProductError implements Action {
   public readonly type = EProductActions.GetProductError;
   constructor(public payload: IProduct) {}
 }
+
+export class CreateProduct implements Action {
+  constructor(public payload: IProduct) {}
+  public readonly type = EProductActions.CreateProduct;
+}
+
+export class CreateProductSuccess implements Action {
+  public readonly type = EProductActions.CreateProductSuccess;
+  constructor(public payload: IProduct) {}
+}
+
+export class CreateProductError implements Action {
+  public readonly type = EProductActions.CreateProductError;
+  constructor(public payload: IProduct) {}
+}
+
 
 export class UpdateProduct implements Action {
   constructor(public payload: IProduct) {}
@@ -94,4 +95,4 @@ export class RemoveProductError implements Action {
 }
 
 
-export type ProductActions = GetProducts |  GetProductsSuccess | GetProductsError | GetProduct |  GetProductSuccess | GetProductError | CreateProduct |  CreateProductSuccess | CreateProductError;;
+export type ProductActions = GetProducts |  GetProductsSuccess | GetProductsError | GetProduct |  GetProductSuccess | GetProductError | CreateProduct |  CreateProductSuccess | CreateProductError;

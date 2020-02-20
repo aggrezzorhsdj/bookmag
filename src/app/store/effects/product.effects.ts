@@ -2,9 +2,8 @@ import {Injectable} from '@angular/core';
 import { Effect, ofType, Actions} from '@ngrx/effects';
 
 import {Store, select} from '@ngrx/store';
-
 import { of } from 'rxjs';
-import {switchMap, map, withLatestFrom, catchError} from 'rxjs/operators';
+import {switchMap, map, withLatestFrom, catchError, filter} from 'rxjs/operators';
 
 import {IAppState} from '../state/app.state';
 
@@ -20,26 +19,26 @@ import {
   UpdateProductError,
   RemoveProduct,
   RemoveProductSuccess,
-  RemoveProductError, EProductActions, CreateProductSuccess, CreateProductError,
+  RemoveProductError, EProductActions, CreateProductSuccess, CreateProductError, CreateProduct,
 
 } from '../actions/product.actions';
 import {IProduct} from '../../interfaces/product.interface';
 import {GetDataService} from '../../services/get-data.service';
 import {IProductState} from '../state/product.state';
-import {selectProductList} from '../selectors/product.selectors';
+import {selectProductList, selectSelectedProduct} from '../selectors/product.selectors';
 import {EUserActions, UpdateUser, UpdateUserError, UpdateUserSuccess} from '../actions/user.actions';
 import {IUser} from '../../interfaces/user.interface';
 
 @Injectable()
 export class ProductEffects {
   @Effect()
-  getProduct$ = this.actions$.pipe(
-      ofType<GetProduct>(EProductActions.GetProduct),
-      switchMap(action =>
-        this.getData.getProduct(action.payload).pipe(
-            map(product => new GetProductSuccess(product))
-        )
-      ),
+  getProductStore$ = this.actions$.pipe(
+    ofType<GetProduct>(EProductActions.GetProduct),
+    map(action => action.payload),
+    switchMap(id => {
+      return this.store.pipe(select(selectSelectedProduct(id)));
+    }),
+    switchMap((product: IProduct) => of(new GetProductSuccess(product)))
   );
   @Effect()
   getProducts$ = this.actions$.pipe(
@@ -60,11 +59,11 @@ export class ProductEffects {
 
   @Effect()
   createProduct$ = this.actions$.pipe(
-      ofType<UpdateProduct>(EProductActions.CreateProduct),
+      ofType<CreateProduct>(EProductActions.CreateProduct),
       switchMap((data) => {
         return this.getData.createData(data.payload, 'products').pipe(
-            map((res: IProduct) => new CreateProductSuccess(res)),
-            catchError(error => of(new CreateProductError(error)))
+          map((res: IProduct) => new UpdateProductSuccess(res)),
+          catchError(error => of(new UpdateProductError(error)))
         );
       })
   );
