@@ -10,7 +10,7 @@ let Users = require('../models/users.model');
 
 // Get User
 usersRoute.route('/authenticate').post((req, res, next) => {
-
+  console.log(req);
   Users.findOne({login: req.body.login, password: req.body.password}, (error, data) => {
     if (error) {
       return next(error)

@@ -18,6 +18,24 @@ export const userReducers = (
         selectedUser: action.payload
       };
     }
+    case EUserActions.UpdateUserSuccess: {
+      return {
+        ...state,
+        selectedUser: action.payload
+      };
+    }
+    case EUserActions.AuthUserSuccess: {
+      return {
+        ...state,
+        selectedUser: action.payload
+      };
+    }
+    case EUserActions.AuthUserError: {
+      return {
+        ...state,
+        error: action.payload
+      };
+    }
     default:
       return state;
   }

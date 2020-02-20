@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Router } from '@angular/router';
-import {Observable} from 'rxjs';
-import { User } from '../models/user';
+import {Observable, of, throwError} from 'rxjs';
 import {UserLogin} from '../models/user-login';
 import {catchError, map} from 'rxjs/operators';
+import {IUser} from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +12,34 @@ import {catchError, map} from 'rxjs/operators';
 export class AuthService {
   api = 'http://localhost:4000/api';
   token: string;
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient, private router: Router) { }
-  login(login: string, password: string): Observable<UserLogin> {
-    return this.http.post<UserLogin>(this.api + '/users/authenticate', {login, password});
+  login(data): Observable<IUser> {
+    return this.http.post<IUser>(`${this.api}/users/authenticate`, data).pipe(
+        map(
+            res => {
+              localStorage.setItem('token', res.token);
+              localStorage.setItem('userId', res.id);
+              this.router.navigate(['profile']);
+              return res;
+            }
+        ),
+        catchError(err => this.handleError(err))
+    );
+  }
+  getUsers(): Observable<IUser> {
+    return this.http.get<IUser>(this.api + '/users');
   }
   public logout() {
-    localStorage.removeItem('auth_token');
+    localStorage.removeItem('token');
     localStorage.removeItem('userId');
   }
   public get logIn(): boolean {
-    return (localStorage.getItem('auth_token') !== null);
+    return (localStorage.getItem('token') !== null);
   }
+    private handleError(err) {
+        if (typeof err !== undefined) {
+            return throwError(err.error.errorMessage);
+        }
+    }
 }

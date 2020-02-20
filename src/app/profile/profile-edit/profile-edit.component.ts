@@ -9,6 +9,7 @@ import {select, Store} from '@ngrx/store';
 import {selectSelectedUser} from '../../store/selectors/user.selectors';
 import {IUser} from '../../interfaces/user.interface';
 import {GetUser, UpdateUser} from '../../store/actions/user.actions';
+import {NotificationsService} from '../../notifications/notifications.service';
 
 @Component({
   selector: 'app-profile-edit',
@@ -42,7 +43,8 @@ export class ProfileEditComponent implements OnInit {
     private authService: AuthService,
     private getData: GetDataService,
     private store: Store<IAppState>,
-    private router: Router
+    private router: Router,
+    private notify: NotificationsService
   ) {}
   passwordMatcher(group: FormGroup) {
     const password = group.get('password').value;
@@ -82,6 +84,7 @@ export class ProfileEditComponent implements OnInit {
       };
       console.log(data);
       this.store.dispatch(new UpdateUser(data));
+      this.notify.notify('Данные обновлены', 1);
     }
   }
   ngOnInit() {

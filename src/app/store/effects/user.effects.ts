@@ -15,16 +15,28 @@ import {
   GetUsers,
   EUserActions,
   UpdateUser,
-  UpdateUserSuccess, UpdateUserError,
+  UpdateUserSuccess, UpdateUserError, AuthUser, AuthUserSuccess, AuthUserError,
 } from '../actions/user.actions';
 
 import {GetDataService} from '../../services/get-data.service';
 import {selectUserList} from '../selectors/user.selectors';
 import {IUser} from '../../interfaces/user.interface';
+import {AuthService} from '../../services/auth.service';
 
 
 @Injectable()
 export class UserEffects {
+  @Effect()
+  authUser$ = this.actions$.pipe(
+      ofType<AuthUser>(EUserActions.AuthUser),
+      switchMap(action => {
+        console.log(action);
+        return this.auth.login(action.payload).pipe(
+            map(res => (new AuthUserSuccess(res))),
+            catchError(err => of(new AuthUserError(err)))
+        );
+      })
+  );
   @Effect()
   getUser$ = this.actions$.pipe(
     ofType<GetUser>(EUserActions.GetUser),
@@ -44,6 +56,7 @@ export class UserEffects {
   constructor(
     private actions$: Actions,
     private getData: GetDataService,
+    private auth: AuthService,
     private store: Store<IAppState>
   ) {
   }

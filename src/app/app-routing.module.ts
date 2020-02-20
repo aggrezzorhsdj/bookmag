@@ -6,6 +6,7 @@ import {MainComponent} from './main/main.component';
 import {LoginComponent} from './login/login.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {NotificationsModule} from './notifications/notifications.module';
 
 const appRoute: Routes = [
   {path: '', component: MainComponent, pathMatch: 'full'},
@@ -22,11 +23,12 @@ const s = '';
     LoginComponent,
     PageNotFoundComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(appRoute),
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forRoot(appRoute),
+        ReactiveFormsModule,
+        NotificationsModule
+    ],
   exports: [
     RouterModule
   ]

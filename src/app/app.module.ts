@@ -16,7 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {GetDataService} from './services/get-data.service';
-import {ProductEffects} from "./store/effects/product.effects";
+import {ProductEffects} from './store/effects/product.effects';
+import {NotificationsModule} from './notifications/notifications.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {ProductEffects} from "./store/effects/product.effects";
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    NotificationsModule,
     FormsModule,
     HttpClientModule,
     FontAwesomeModule,

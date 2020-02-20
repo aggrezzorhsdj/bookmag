@@ -206,3 +206,27 @@ a{
   }
 }
 /*Table*/
+
+/*Info*/
+.info{
+  max-width: 30rem;
+  position: fixed;
+  top: 4rem;
+  left: 4rem;
+  border: 0.1rem solid @gray;
+  border-radius: 0.4rem;
+  font-size: 1.4rem;
+  padding: 2rem 4rem;
+  opacity: 0;
+  transform: translateX(-120%);
+  transition: 0.4s ease-in;
+  &_danger{
+    background-color: @info-danger-low;
+    border-color: @info-danger;
+  }
+  &.show{
+    opacity: 1;
+    transform: none;
+  }
+}
+/*Info*/

@@ -13,3 +13,8 @@ export const selectSelectedUser = createSelector(
   selectUsers,
   (state: IUserState) => state.selectedUser
 )
+
+export const getError = createSelector(
+    selectUsers,
+    (state: IUserState) => state.error
+)

@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthService} from '../services/auth.service';
+import {select, Store} from '@ngrx/store';
+import {IAppState} from '../store/state/app.state';
+import {AuthUser} from '../store/actions/user.actions';
+import {getError, selectSelectedUser} from '../store/selectors/user.selectors';
+import {NotificationsService} from '../notifications/notifications.service';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +16,33 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent implements OnInit {
   submitted = false;
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
-    this.mainForm();
+  error = null;
+  constructor(
+      private fb: FormBuilder,
+      private authService: AuthService,
+      private router: Router,
+      private store: Store<IAppState>,
+      private notify: NotificationsService,
+  ) {
   }
   ngOnInit() {
+    this.mainForm();
+    this.store.pipe(select(getError)).subscribe(
+        err => {
+          if (err !== null) {
+            console.log(err);
+            this.notify.notify(err, 0);
+            this.error = err;
+          }
+        }
+    );
+    this.store.pipe(select(selectSelectedUser)).subscribe(
+      res => {
+        if (res !== null) {
+          console.log(res);
+        }
+      },
+    );
   }
   mainForm() {
     this.loginForm = this.fb.group({
@@ -32,19 +60,15 @@ export class LoginComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
-    console.log(this.loginForm.valid);
     if (!this.loginForm.valid) {
       return false;
     } else {
-      console.log(this.loginForm.get('login').value);
-      this.authService.login(this.loginForm.get('login').value, this.loginForm.get('password').value)
-        .subscribe((resp) => {
-          this.router.navigate(['profile']);
-          console.log(resp);
-          localStorage.setItem('userId', resp.id);
-          localStorage.setItem('auth_token', resp.token);
-        })
-        .unsubscribe();
+      const data = {
+        login: this.loginForm.get('login').value,
+        password: this.loginForm.get('password').value
+      };
+      this.store.dispatch(new AuthUser(data));
+
     }
   }
 }
