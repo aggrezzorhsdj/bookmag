@@ -36,13 +36,7 @@ export class LoginComponent implements OnInit {
           }
         }
     );
-    this.store.pipe(select(selectSelectedUser)).subscribe(
-      res => {
-        if (res !== null) {
-          console.log(res);
-        }
-      },
-    );
+    this.store.pipe(select(selectSelectedUser));
   }
   mainForm() {
     this.loginForm = this.fb.group({

@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const path = require('path')
+const path = require('path');
 const app = express();
 const productsRoute = express.Router();
 
@@ -34,15 +34,13 @@ let upload = multer({
 // Products model
 let Products = require('../models/products.model');
 
-productsRoute.route('/upload').post(upload.single('file'), (req, res, next) => {
-  if(req.file)
-    res.json(req.file.filename);
-})
-// Add Products
-productsRoute.route('/create').post((req, res, next) => {
-  Products.create(req.body, (error, data) => {
+productsRoute.route('/create').post(upload.single('file'), (req, res, next) => {
+  console.log(req.body);
+  let data = JSON.parse(req.body.data);
+  data.image = req.file.filename;
+  Products.create(data, (error, data) => {
     if (error) {
-      return next(error)
+      return next(error);
     } else {
       res.json(data)
     }
@@ -99,5 +97,4 @@ productsRoute.route('/delete/:id').delete((req, res, next) => {
     }
   })
 })
-
 module.exports = productsRoute;

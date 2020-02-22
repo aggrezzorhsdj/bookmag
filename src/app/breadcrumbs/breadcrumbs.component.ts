@@ -16,7 +16,6 @@ export class BreadcrumbsComponent implements OnInit {
       private activatedRoute: ActivatedRoute
   ) {
     this.breadcrumbs = this.buildBreadCrumbs(this.activatedRoute.root);
-    console.dir(this.breadcrumbs);
   }
 
   ngOnInit() {
@@ -28,11 +27,8 @@ export class BreadcrumbsComponent implements OnInit {
     });
   }
   buildBreadCrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: IBreadcrumbs[] = []): IBreadcrumbs[] {
-    // If no routeConfig is avalailable we are on the root path
     let label = route.routeConfig && route.routeConfig.data ? route.routeConfig.data.breadcrumb : '';
     let path = route.routeConfig && route.routeConfig.data ? route.routeConfig.path : '';
-
-    // If the route is dynamic route such as ':id', remove it
     const lastRoutePart = path.split('/').pop();
     const isDynamicRoute = lastRoutePart.startsWith(':');
     if (isDynamicRoute && !!route.snapshot) {
@@ -40,20 +36,14 @@ export class BreadcrumbsComponent implements OnInit {
       path = path.replace(lastRoutePart, route.snapshot.params[paramName]);
       label = route.snapshot.params[paramName];
     }
-
-    // In the routeConfig the complete path is not available,
-    // so we rebuild it each time
     const nextUrl = path ? `${url}/${path}` : url;
 
     const breadcrumb: IBreadcrumbs = {
       label,
       url: nextUrl,
     };
-    // Only adding route with non-empty label
     const newBreadcrumbs: IBreadcrumbs[] = breadcrumb.label ? [ ...breadcrumbs, breadcrumb ] : [ ...breadcrumbs];
     if (route.firstChild) {
-      // If we are not on our current path yet,
-      // there will be more children to look after, to build our breadcumb
       return this.buildBreadCrumbs(route.firstChild, nextUrl, newBreadcrumbs);
     }
     return newBreadcrumbs;

@@ -38,9 +38,8 @@ export class GetDataService {
       errorMessage = error.error.message;
     } else {
       // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.error}`;
     }
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
   getProduct(id): Observable<IProduct> {
@@ -56,9 +55,12 @@ export class GetDataService {
     );
   }
 
-  createData(data: IProduct, entity: string) {
+  createData(data: IProduct, entity: string, file) {
     const url = `${this.api}/${entity}/create/`;
-    return this.http.post(url, data).pipe(
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    formData.append('data', JSON.stringify(data));
+    return this.http.post(url, formData).pipe(
         catchError(this.errorMgmt)
     );
   }

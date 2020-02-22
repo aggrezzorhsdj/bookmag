@@ -82,7 +82,6 @@ export class ProfileEditComponent implements OnInit {
         email: this.userEditForm.get('email').value,
         password: this.userEditForm.get('passwordGroup').get('password').value,
       };
-      console.log(data);
       this.store.dispatch(new UpdateUser(data));
     }
   }
@@ -93,7 +92,6 @@ export class ProfileEditComponent implements OnInit {
   readUser() {
     this.store.pipe<IUser>(select(selectSelectedUser)).subscribe(
       user => {
-        console.dir(user);
         if (user !== null) {
           this.userEditForm.patchValue({
             login: user.login,

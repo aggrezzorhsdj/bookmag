@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
 
 const Product = new Schema({
@@ -10,7 +11,8 @@ const Product = new Schema({
   article:{
     type: String,
     required: true,
-    maxlength: 20
+    maxlength: 20,
+    unique: true
   },
   description:{
     type: String,
@@ -32,6 +34,10 @@ const Product = new Schema({
     type: String,
     default: 'default'
   }
+});
+
+Product.plugin(uniqueValidator, {
+  message: 'Error, expected {PATH} to be unique.'
 });
 
 module.exports = mongoose.model("Product", Product);

@@ -14,6 +14,7 @@ mongoose.connect(dbConfig.dbremote, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useFindAndModify: false,
+  useCreateIndex: true
 }).then(() => {
     console.log('Database sucessfully connected')
   },
@@ -46,6 +47,7 @@ const server = app.listen(port, () => {
   console.log('Connected to port ' + port)
 })
 
+
 // Find 404 and hand over to error handler
 app.use((req, res, next) => {
   next(createError(404));
@@ -53,7 +55,7 @@ app.use((req, res, next) => {
 
 // error handler
 app.use(function (err, req, res, next) {
-  console.error(err.message);
+  console.error(err.statusCode);
   if (!err.statusCode) err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
 });

@@ -31,14 +31,13 @@ export class UserEffects {
   authUser$ = this.actions$.pipe(
       ofType<AuthUser>(EUserActions.AuthUser),
       switchMap(action => {
-        console.log(action);
         return this.auth.login(action.payload).pipe(
             map((res) => {
-                this.notify.notify('Вход выполнен', 1, 2000);
+                this.notify.notify('Вход выполнен', 1, 8000);
                 return new AuthUserSuccess(res);
             }),
             catchError((err) => {
-                this.notify.notify(err, 0, 2000);
+                this.notify.notify(err, 0, 8000);
                 return of(new AuthUserError(err));
             })
         );
@@ -56,11 +55,11 @@ export class UserEffects {
     switchMap((data) => {
       return this.getData.updateData(data, 'users').pipe(
           map((res: IUser) => {
-              this.notify.notify('Данные обновленны', 1, 2000);
+              this.notify.notify('Данные обновленны', 1, 8000);
               return new UpdateUserSuccess(res);
           }),
           catchError((err) => {
-              this.notify.notify(err, 0, 2000);
+              this.notify.notify(err, 0, 8000);
               return of(new UpdateUserError(err));
           })
       );
