@@ -56,10 +56,16 @@ export class GetDataService {
     );
   }
 
-    createData(data: IProduct, entity: string) {
-      const url = `${this.api}/${entity}/create/`;
-      return this.http.post(url, data).pipe(
-          catchError(this.errorMgmt)
-      );
-    }
+  createData(data: IProduct, entity: string) {
+    const url = `${this.api}/${entity}/create/`;
+    return this.http.post(url, data).pipe(
+        catchError(this.errorMgmt)
+    );
+  }
+  removeData(id: string, entity: string) {
+    const url = `${this.api}/${entity}/delete/${id}`;
+    return this.http.delete(url).pipe(
+        catchError(this.errorMgmt)
+    );
+  }
 }

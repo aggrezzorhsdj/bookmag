@@ -22,6 +22,7 @@ import {GetDataService} from '../../services/get-data.service';
 import {selectUserList} from '../selectors/user.selectors';
 import {IUser} from '../../interfaces/user.interface';
 import {AuthService} from '../../services/auth.service';
+import {NotificationsService} from '../../notifications/notifications.service';
 
 
 @Injectable()
@@ -32,8 +33,14 @@ export class UserEffects {
       switchMap(action => {
         console.log(action);
         return this.auth.login(action.payload).pipe(
-            map(res => (new AuthUserSuccess(res))),
-            catchError(err => of(new AuthUserError(err)))
+            map((res) => {
+                this.notify.notify('Вход выполнен', 1, 2000);
+                return new AuthUserSuccess(res);
+            }),
+            catchError((err) => {
+                this.notify.notify(err, 0, 2000);
+                return of(new AuthUserError(err));
+            })
         );
       })
   );
@@ -48,8 +55,14 @@ export class UserEffects {
     ofType<UpdateUser>(EUserActions.UpdateUser),
     switchMap((data) => {
       return this.getData.updateData(data, 'users').pipe(
-        map((res: IUser) => new UpdateUserSuccess(res)),
-        catchError(error => of(new UpdateUserError(error)))
+          map((res: IUser) => {
+              this.notify.notify('Данные обновленны', 1, 2000);
+              return new UpdateUserSuccess(res);
+          }),
+          catchError((err) => {
+              this.notify.notify(err, 0, 2000);
+              return of(new UpdateUserError(err));
+          })
       );
     })
   );
@@ -57,6 +70,7 @@ export class UserEffects {
     private actions$: Actions,
     private getData: GetDataService,
     private auth: AuthService,
+    private notify: NotificationsService,
     private store: Store<IAppState>
   ) {
   }

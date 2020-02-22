@@ -10,10 +10,10 @@ import {NotificationsModule} from './notifications/notifications.module';
 
 const appRoute: Routes = [
   {path: '', component: MainComponent, pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
-  {path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},
-  {path: 'books', loadChildren: './books/books.module#BooksModule'},
-  {path: '**', component: PageNotFoundComponent},
+  {path: 'login', data: { breadcrumb: 'Вход' }, component: LoginComponent},
+  {path: 'profile', data: { breadcrumb: 'Профиль' }, loadChildren: './profile/profile.module#ProfileModule'},
+  {path: 'books', data: { breadcrumb: 'Книги' }, loadChildren: './books/books.module#BooksModule'},
+  {path: '**', data: { breadcrumb: '404' }, component: PageNotFoundComponent},
 ];
 
 const s = '';

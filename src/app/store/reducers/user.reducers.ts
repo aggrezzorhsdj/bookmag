@@ -27,13 +27,15 @@ export const userReducers = (
     case EUserActions.AuthUserSuccess: {
       return {
         ...state,
-        selectedUser: action.payload
+        selectedUser: action.payload,
+        isLogin: true
       };
     }
     case EUserActions.AuthUserError: {
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        isLogin: false
       };
     }
     default:

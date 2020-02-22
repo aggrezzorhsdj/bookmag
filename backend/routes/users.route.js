@@ -16,7 +16,6 @@ usersRoute.route('/authenticate').post((req, res, next) => {
       return next(error)
     } else {
       if(data !== null) {
-        console.log(data);
         let token = jwt.sign(data.login+data.password, config.secret);
         res.status(200).send({
           id: data._id,

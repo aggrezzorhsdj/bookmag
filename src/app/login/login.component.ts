@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
@@ -11,7 +11,7 @@ import {NotificationsService} from '../notifications/notifications.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less']
+  styleUrls: ['./login.component.less'],
 })
 export class LoginComponent implements OnInit {
   submitted = false;
@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
       private router: Router,
       private store: Store<IAppState>,
       private notify: NotificationsService,
+      private changeDet: ChangeDetectorRef
   ) {
   }
   ngOnInit() {
@@ -31,7 +32,6 @@ export class LoginComponent implements OnInit {
         err => {
           if (err !== null) {
             console.log(err);
-            this.notify.notify(err, 0);
             this.error = err;
           }
         }
@@ -68,7 +68,6 @@ export class LoginComponent implements OnInit {
         password: this.loginForm.get('password').value
       };
       this.store.dispatch(new AuthUser(data));
-
     }
   }
 }

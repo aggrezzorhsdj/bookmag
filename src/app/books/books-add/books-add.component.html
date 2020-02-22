@@ -23,6 +23,15 @@
                 </div>
                 <div class="column-12">
                     <div class="form__group">
+                        <input type="text" class="form__input" id="description" formControlName="description">
+                        <label for="description">Описание</label>
+                        <div class="invalid-control" *ngIf="submitted && myForm.description.errors?.required">
+                            Введите описание
+                        </div>
+                    </div>
+                </div>
+                <div class="column-12">
+                    <div class="form__group">
                         <input type="text" class="form__input" id="category" formControlName="category">
                         <label for="title">Категория</label>
                         <div class="invalid-control" *ngIf="submitted && myForm.category.errors?.required">
@@ -35,7 +44,7 @@
                         <div class="form__group">
                             <input type="number" class="form__input" id="price" formControlName="price">
                             <label for="price">Цена</label>
-                            <div class="invalid-control" *ngIf="submitted && this.addForm.get('priceGroup').hasError('required') && submitted">
+                            <div class="invalid-control" *ngIf="submitted && this.addForm.get('priceGroup').get('price').hasError('required') && submitted">
                                 Введите цену
                             </div>
                         </div>

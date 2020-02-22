@@ -59,6 +59,7 @@ export class BooksAddComponent implements OnInit {
         price: this.addForm.get('priceGroup').get('price').value,
         old_price: this.addForm.get('priceGroup').get('oldPrice').value,
       };
+      console.log(product);
       this.store.dispatch(new CreateProduct(product));
     }
   }

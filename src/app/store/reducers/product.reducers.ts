@@ -1,5 +1,5 @@
-import {ProductActions, EProductActions} from '../actions/product.actions';
-import {IProductState, initialProductState} from '../state/product.state';
+import {EProductActions, ProductActions} from '../actions/product.actions';
+import {initialProductState, IProductState} from '../state/product.state';
 
 export const productReducers = (
   state = initialProductState,
@@ -10,6 +10,12 @@ export const productReducers = (
       return {
         ...state,
         products: action.payload
+      };
+    }
+    case EProductActions.RemoveProductSuccess: {
+      return {
+        ...state,
+        selectedProduct: action.payload
       };
     }
     case EProductActions.GetProductSuccess: {

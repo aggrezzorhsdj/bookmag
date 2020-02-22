@@ -95,4 +95,15 @@ export class RemoveProductError implements Action {
 }
 
 
-export type ProductActions = GetProducts |  GetProductsSuccess | GetProductsError | GetProduct |  GetProductSuccess | GetProductError | CreateProduct |  CreateProductSuccess | CreateProductError;
+export type ProductActions = GetProducts
+| GetProductsSuccess
+| GetProductsError
+| GetProduct
+| GetProductSuccess
+| GetProductError
+| CreateProduct
+| CreateProductSuccess
+| CreateProductError
+| RemoveProduct
+| RemoveProductSuccess
+| RemoveProductError;

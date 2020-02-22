@@ -57,13 +57,13 @@ productsRoute.route('/update/:id').post((req, res, next) => {
 
 // Delete Products
 productsRoute.route('/delete/:id').delete((req, res, next) => {
-  Products.findOneAndRemove(req.params.id, (error, data) => {
+  Products.findOneAndRemove({_id: req.params.id}, (error, data) => {
     if (error) {
       return next(error);
     } else {
-      res.status(200).json({
-        msg: data
-      })
+      res.status(200).json(data)
+      console.log(`id of removing element ${req.params.id}`);
+      console.log(`removing data in api ${data}`);
     }
   })
 })

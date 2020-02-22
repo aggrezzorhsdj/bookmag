@@ -84,7 +84,6 @@ export class ProfileEditComponent implements OnInit {
       };
       console.log(data);
       this.store.dispatch(new UpdateUser(data));
-      this.notify.notify('Данные обновлены', 1);
     }
   }
   ngOnInit() {

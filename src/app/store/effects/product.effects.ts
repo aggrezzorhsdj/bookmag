@@ -26,8 +26,16 @@ import {IProduct} from '../../interfaces/product.interface';
 import {GetDataService} from '../../services/get-data.service';
 import {IProductState} from '../state/product.state';
 import {selectProductList, selectSelectedProduct} from '../selectors/product.selectors';
-import {EUserActions, UpdateUser, UpdateUserError, UpdateUserSuccess} from '../actions/user.actions';
+import {
+    AuthUserError,
+    AuthUserSuccess,
+    EUserActions,
+    UpdateUser,
+    UpdateUserError,
+    UpdateUserSuccess
+} from '../actions/user.actions';
 import {IUser} from '../../interfaces/user.interface';
+import {NotificationsService} from '../../notifications/notifications.service';
 
 @Injectable()
 export class ProductEffects {
@@ -54,26 +62,56 @@ export class ProductEffects {
       ofType<UpdateProduct>(EProductActions.UpdateProduct),
       switchMap((data) => {
         return this.getData.updateData(data, 'products').pipe(
-            map((res: IProduct) => new UpdateProductSuccess(res)),
-            catchError(error => of(new UpdateProductError(error)))
+            map((res: IProduct) => {
+                this.notify.notify('Данные обновлены', 1, 2000);
+                return new UpdateProductSuccess(res);
+            }),
+            catchError((err) => {
+                this.notify.notify(err, 0, 2000);
+                return of(new UpdateProductError(err));
+            })
         );
       })
   );
 
   @Effect()
-  createProduct$ = this.actions$.pipe(
-      ofType<CreateProduct>(EProductActions.CreateProduct),
-      switchMap((data) => {
-        return this.getData.createData(data.payload, 'products').pipe(
-          map((res: IProduct) => new UpdateProductSuccess(res)),
-          catchError(error => of(new UpdateProductError(error)))
-        );
-      })
-  );
+    createProduct$ = this.actions$.pipe(
+        ofType<CreateProduct>(EProductActions.CreateProduct),
+        switchMap((data) => {
+            return this.getData.createData(data.payload, 'products').pipe(
+                map((res: IProduct) => {
+                    this.notify.notify(`Добавлен продукт${res.title}`, 1, 2000);
+                    return new CreateProductSuccess(res);
+                }),
+                catchError((err) => {
+                    this.notify.notify(err, 0, 2000);
+                    return of(new CreateProductError(err));
+                })
+            );
+        })
+    );
+  @Effect()
+    removeProduct$ = this.actions$.pipe(
+        ofType<RemoveProduct>(EProductActions.RemoveProduct),
+        switchMap((data) => {
+            console.dir(data)
+            return this.getData.removeData(data.payload, 'products').pipe(
+                map((res: IProduct) => {
+                    this.notify.notify(`Продукт удален ${res.title}`, 1, 2000);
+                    return new RemoveProductSuccess(res);
+                }),
+                catchError((err) => {
+                    this.notify.notify(err, 0, 2000);
+                    return of(new CreateProductError(err));
+                })
+            );
+        })
+    );
   constructor(
     private actions$: Actions,
     private getData: GetDataService,
-    private store: Store<IProductState>
+    private store: Store<IProductState>,
+    private notify: NotificationsService
   ) {
   }
 }

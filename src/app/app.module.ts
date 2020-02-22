@@ -18,11 +18,13 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {GetDataService} from './services/get-data.service';
 import {ProductEffects} from './store/effects/product.effects';
 import {NotificationsModule} from './notifications/notifications.module';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    BreadcrumbsComponent,
   ],
   imports: [
     BrowserModule,
