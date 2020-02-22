@@ -5,7 +5,8 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   dbConfig = require('./database/db'),
   config = require('./config/config'),
-  createError = require('http-errors')
+  createError = require('http-errors'),
+  multer = require('multer')
 
 
 mongoose.Promise = global.Promise;

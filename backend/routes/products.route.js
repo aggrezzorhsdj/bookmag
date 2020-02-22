@@ -1,17 +1,49 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path')
 const app = express();
 const productsRoute = express.Router();
+
+// File upload settings
+const PATH = './assets/images';
+
+let storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, PATH);
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+  }
+});
+const fileFilter = (req, file, cb) => {
+
+  if(file.mimetype === "image/png" ||
+      file.mimetype === "image/jpg"||
+      file.mimetype === "image/jpeg"){
+    cb(null, true);
+  }
+  else{
+    cb(null, false);
+  }
+}
+let upload = multer({
+  storage: storage,
+  fileFilter: fileFilter
+});
 
 // Products model
 let Products = require('../models/products.model');
 
+productsRoute.route('/upload').post(upload.single('file'), (req, res, next) => {
+  if(req.file)
+    res.json(req.file.filename);
+})
 // Add Products
 productsRoute.route('/create').post((req, res, next) => {
   Products.create(req.body, (error, data) => {
     if (error) {
       return next(error)
     } else {
-
       res.json(data)
     }
   })

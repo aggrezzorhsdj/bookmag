@@ -14,11 +14,13 @@ import {CreateProduct} from '../../store/actions/product.actions';
 })
 export class BooksAddComponent implements OnInit {
   submitted = false;
+  file: File;
   public addForm: FormGroup = this.fb.group({
     article: ['', [Validators.required, Validators.pattern('^[a-zA-Z][a-zA-Z0-9-_@\.]{2,20}$')]],
     title: ['', [Validators.required]],
     description: [''],
     category: ['', [Validators.required]],
+    image: [''],
     priceGroup: this.fb.group({
       price: ['', [Validators.required, Validators.pattern('^[0-9\.]{2,20}$')]],
       oldPrice: ['', [Validators.required, Validators.pattern('^[0-9\.]{2,20}$')]],
@@ -44,6 +46,10 @@ export class BooksAddComponent implements OnInit {
   get myForm() {
     return this.addForm.controls;
   }
+  getFile(event) {
+    const reader = new FileReader();
+    this.file = event.target.files[0];
+  }
   ngOnInit() {
   }
   onSubmit() {
@@ -51,10 +57,12 @@ export class BooksAddComponent implements OnInit {
     if (!this.addForm.valid) {
       return false;
     } else {
+      console.log(JSON.stringify(this.file));
       const product: IProduct = {
         article: this.addForm.get('article').value,
         title: this.addForm.get('title').value,
         description: this.addForm.get('description').value,
+        imageFile: this.file,
         category: this.addForm.get('category').value,
         price: this.addForm.get('priceGroup').get('price').value,
         old_price: this.addForm.get('priceGroup').get('oldPrice').value,

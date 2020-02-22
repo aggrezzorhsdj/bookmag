@@ -16,6 +16,10 @@ const Product = new Schema({
     type: String,
     maxlength: 50
   },
+  image:{
+    type: String,
+    default: '/backend/assets/images/product-default.jpg'
+  },
   price:{
     type: Number,
     default: 0

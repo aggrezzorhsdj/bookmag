@@ -68,4 +68,10 @@ export class GetDataService {
         catchError(this.errorMgmt)
     );
   }
+  uploadImage(file, entity): Observable<string> {
+    const url = `${this.api}/${entity}/upload`;
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post<string>(url, formData);
+  }
 }

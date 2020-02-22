@@ -78,6 +78,14 @@ export class ProductEffects {
     createProduct$ = this.actions$.pipe(
         ofType<CreateProduct>(EProductActions.CreateProduct),
         switchMap((data) => {
+            let filename;
+            this.getData.uploadImage(data.payload.imageFile, 'products').subscribe(
+                res => {
+                    console.log(res);
+                    filename = res;
+                }
+            );
+            data.payload.image = filename;
             return this.getData.createData(data.payload, 'products').pipe(
                 map((res: IProduct) => {
                     this.notify.notify(`Добавлен продукт${res.title}`, 1, 2000);

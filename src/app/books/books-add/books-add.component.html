@@ -39,6 +39,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="column-12">
+                    <div class="form__group">
+                        <input type="file" class="form__input" id="image" (change)="this.getFile($event)" name="image">
+                        <label for="title">Изображение</label>
+                    </div>
+                </div>
                 <div class="" formGroupName="priceGroup">
                     <div class="column-12">
                         <div class="form__group">

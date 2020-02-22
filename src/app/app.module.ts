@@ -19,12 +19,14 @@ import {GetDataService} from './services/get-data.service';
 import {ProductEffects} from './store/effects/product.effects';
 import {NotificationsModule} from './notifications/notifications.module';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import {FileSelectDirective} from 'ng2-file-upload';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     BreadcrumbsComponent,
+    FileSelectDirective,
   ],
   imports: [
     BrowserModule,
