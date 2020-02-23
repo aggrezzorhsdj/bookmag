@@ -47,6 +47,11 @@ p,a{
     transition: 0.3s;
     display: block;
     width: 100%;
+    margin-bottom: 1.5rem;
+    &_select{
+      padding: 1rem 2rem;
+      width: 20rem;
+    }
     &:focus,&:active,&:hover{
       background: transparent;
       box-shadow: 0 0 0 0.3rem rgba(212, 212, 212, 0.45);
@@ -77,6 +82,56 @@ p,a{
 }
 
 /*Form*/
+/*Checkboxes*/
+.checkbox{
+  padding: 1.5rem 0 1.5rem 3rem;
+  position: relative;
+  margin-bottom: 2rem;
+  &__input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  &__checkmark{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rem;
+    height: 2rem;
+    background-color: @middle-gray;
+    transition: 0.3s;
+    border-radius: 0.4rem;
+  }
+  &__input:checked ~ &__checkmark{
+    background-color: @gray;
+  }
+  &__input ~ &__checkmark::before{
+    content: '';
+    position: absolute;
+    opacity: 0;
+    left: 0.6rem;
+    top: 50%;
+    width: 0.5rem;
+    height: 1rem;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transition: 0.3s;
+    -webkit-transform: translateY(-50%) rotate(45deg);
+    -ms-transform: translateY(-50%) rotate(45deg);
+    transform: translateY(-50%) rotate(45deg);
+  }
+  &__input:checked ~ &__checkmark::before{
+    opacity: 1;
+  }
+  &__input:active ~ &__checkmark {
+    transform: scale(0.4) translateY(-50%);
+  }
+}
+
+/*Checkboxes*/
 /*Buttons*/
 .button{
   outline: none;

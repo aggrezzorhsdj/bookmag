@@ -26,6 +26,7 @@ import {IProduct} from '../../interfaces/product.interface';
 import {GetDataService} from '../../services/get-data.service';
 import {IProductState} from '../state/product.state';
 import {NotificationsService} from '../../notifications/notifications.service';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class ProductEffects {
@@ -78,7 +79,8 @@ export class ProductEffects {
             }
             return this.getData.createData(product, 'products', data.payload.imageFile).pipe(
                 map((res: IProduct) => {
-                    this.notify.notify(`Добавлен продукт${res.title}`, 1, 8000);
+                    this.notify.notify(`Добавлен продукт ${res.title}`, 1, 8000);
+                    this.router.navigate(['books']);
                     return new CreateProductSuccess(res);
                 }),
                 catchError((err) => {
@@ -109,7 +111,8 @@ export class ProductEffects {
     private actions$: Actions,
     private getData: GetDataService,
     private store: Store<IProductState>,
-    private notify: NotificationsService
+    private notify: NotificationsService,
+    private router: Router
   ) {
   }
 }

@@ -57,7 +57,6 @@ export class BooksAddComponent implements OnInit {
     if (!this.addForm.valid) {
       return false;
     } else {
-      console.log(JSON.stringify(this.file));
       const product: IProduct = {
         article: this.addForm.get('article').value,
         title: this.addForm.get('title').value,
@@ -67,7 +66,6 @@ export class BooksAddComponent implements OnInit {
         price: this.addForm.get('priceGroup').get('price').value,
         old_price: this.addForm.get('priceGroup').get('oldPrice').value,
       };
-      console.log(product);
       this.store.dispatch(new CreateProduct(product));
     }
   }

@@ -20,6 +20,7 @@ import {ProductEffects} from './store/effects/product.effects';
 import {NotificationsModule} from './notifications/notifications.module';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import {FileSelectDirective} from 'ng2-file-upload';
+import { CheckboxComponent } from './checkbox/checkbox.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {FileSelectDirective} from 'ng2-file-upload';
     AppComponent,
     BreadcrumbsComponent,
     FileSelectDirective,
+    CheckboxComponent,
   ],
   imports: [
     BrowserModule,
