@@ -3,7 +3,6 @@
 @import "~src/assets/_vars";
 *{
   box-sizing: border-box;
-  font-family: Roboto, sans-serif;
 }
 
 html{
@@ -135,6 +134,7 @@ p,a{
 /*Buttons*/
 .button{
   outline: none;
+  cursor: pointer;
   background-color: @black;
   border: 0.1rem solid @black;
   border-radius: 0.4rem;
@@ -143,6 +143,11 @@ p,a{
   padding: 1rem 2rem;
   &:visited{
     color:#fff;
+  }
+  &:hover{
+    background-color: @gray;
+    border-color: @gray;
+    box-shadow: 0 0 0.3rem 0.3rem rgba(0,0,0,0.2);
   }
 }
 /*Buttons*/
@@ -155,6 +160,7 @@ p,a{
     font-family: 'Roboto Slab', serif;
     font-size: 3.4rem - 0.4rem*@i;
     font-weight: 700;
+    margin-bottom: 1.5rem;
   }
   .generate-heading(@i + 1);
 }

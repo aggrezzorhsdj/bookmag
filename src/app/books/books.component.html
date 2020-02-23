@@ -1,23 +1,12 @@
 <h1>{{this.title}}</h1>
 <div class="container">
     <div class="row">
-        <div class="column-18">
+        <div class="column-12">
             <a type="button" class="button" routerLink="/books/add">Добавить новую</a>
         </div>
     </div>
     <div class="row">
-        <div class="column-4">
-                <select class="form__input form__input_select" (change)="getProductsOnCategory($event)">
-                    <option value="default">Категория</option>
-                    <option value="Фантастика">Фантастика</option>
-                </select>
-                <select class="form__input form__input_select" (change)="getProductsOnPrice($event)">
-                    <option value="" selected disabled>По цене</option>
-                    <option value="asc">По возрастанию</option>
-                    <option value="desc">По убыванию</option>
-                </select>
-        </div>
-        <div class="column-14">
+        <div class="column-9">
             <table class="table">
                 <thead>
                 <th>ID</th>
@@ -44,6 +33,17 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="column-3">
+            <select class="form__input form__input_select" (change)="getProductsOnCategory($event)">
+                <option value="default">Категория</option>
+                <option value="Фантастика">Фантастика</option>
+            </select>
+            <select class="form__input form__input_select" (change)="getProductsOnPrice($event)">
+                <option value="" selected disabled>По цене</option>
+                <option value="asc">По возрастанию</option>
+                <option value="desc">По убыванию</option>
+            </select>
         </div>
     </div>
 </div>

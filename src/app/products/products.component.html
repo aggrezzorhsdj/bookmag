@@ -1,0 +1,47 @@
+<h1>{{this.title}}</h1>
+<div class="container">
+    <div class="row">
+        <div class="column-9 product__container">
+            <div class="row">
+                <div class="column-4" *ngFor="let product of products$ | async; let i = index">
+                    <div class="product">
+                        <div class="product__inner">
+                            <div class="product__thumb">
+                                <img src="{{this.assetsUrl + product.image}}">
+                            </div>
+                            <div class="product__body">
+                                <div class="product__article">Артикул: {{product.article}}</div>
+                                <div class="product__title"><a routerLink="/products/{{product._id}}">{{product.title}}</a></div>
+                                <div class="product__price">
+                                    <span class="product__price__main">{{product.price}} {{this.currency}} </span>
+                                    <span class="product__price__old"><del>{{product.old_price}}</del></span>
+                                </div>
+                                <div class="product__actions">
+                                    <div class="product__actions__add">
+                                        <button class="button" (click)="this.addToCart(product, 1)">В корзину</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column-3 filters__container">
+            <div class="filters">
+                <div class="heading-2">Фильтры</div>
+                <div>
+                    <select class="form__input form__input_select" (change)="getProductsOnCategory($event)">
+                        <option value="default">Категория</option>
+                        <option value="Фантастика">Фантастика</option>
+                    </select>
+                    <select class="form__input form__input_select" (change)="getProductsOnPrice($event)">
+                        <option value="" selected disabled>По цене</option>
+                        <option value="asc">По возрастанию</option>
+                        <option value="desc">По убыванию</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

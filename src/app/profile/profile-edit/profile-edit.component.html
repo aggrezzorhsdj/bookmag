@@ -3,7 +3,7 @@
   <div class="profile-edit__inner">
     <form [formGroup]="userEditForm" class="form" (submit)="onSubmit()">
       <div class="row">
-        <div class="column-12">
+        <div class="column-8">
           <div class="form__group">
             <input type="text" class="form__input" id="login" formControlName="login">
             <label for="login">Логин</label>
@@ -12,7 +12,7 @@
             </div>
           </div>
         </div>
-        <div class="column-12">
+        <div class="column-8">
           <div class="form__group">
             <input type="text" class="form__input" id="email" formControlName="email">
             <label for="email">Email</label>
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="" formGroupName="passwordGroup">
-          <div class="column-12">
+          <div class="column-8">
             <div class="form__group">
               <input type="password" class="form__input" id="password" formControlName="password">
               <label for="password">Пароль</label>
@@ -31,7 +31,7 @@
               </div>
             </div>
           </div>
-          <div class="column-12">
+          <div class="column-8">
             <div class="form__group">
               <input type="password" class="form__input" id="repeatPassword" formControlName="repeatPassword">
               <label for="repeatPassword">Повторите пароль</label>
@@ -41,7 +41,7 @@
               </div>
             </div>
           </div>
-          <div class="column-12">
+          <div class="column-8">
             <button class="button" type="submit">Сохранить</button>
           </div>
         </div>

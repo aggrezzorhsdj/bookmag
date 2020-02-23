@@ -31,7 +31,7 @@ import {Router} from '@angular/router';
 @Injectable()
 export class ProductEffects {
   @Effect()
-  getProductStore$ = this.actions$.pipe(
+  getProduct$ = this.actions$.pipe(
     ofType<GetProduct>(EProductActions.GetProduct),
     map(action => action.payload),
     switchMap(id => {

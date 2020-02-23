@@ -20,7 +20,7 @@ const Product = new Schema({
   },
   image:{
     type: String,
-    default: '/backend/assets/images/product-default.jpg'
+    default: 'product-default.jpg'
   },
   price:{
     type: Number,

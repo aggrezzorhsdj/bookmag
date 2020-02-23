@@ -5,7 +5,7 @@
   <nav class="nav">
     <ul class="nav__navbar">
       <li class="nav__navbar__item">
-        <a class="a-theme nav__navbar__item__link">Книги</a>
+        <a class="a-theme nav__navbar__item__link" routerLink="products">Книги</a>
       </li>
       <li class="nav__navbar__item">
         <a class="a-theme nav__navbar__item__link">Бестселлеры</a>
@@ -23,7 +23,7 @@
         <a class="a-theme a-theme nav__navbar__item__link" *ngIf="authService.logIn" routerLinkActive="active" routerLink="/profile">Профиль</a>
       </li>
       <li class="nav__navbar__item nav__navbar__item">
-        <a class="a-theme a-theme nav__navbar__item__link">Корзина</a>
+        <a class="a-theme a-theme nav__navbar__item__link" routerLink="cart">Корзина</a>
       </li>
     </ul>
   </nav>

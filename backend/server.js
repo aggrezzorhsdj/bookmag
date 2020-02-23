@@ -37,6 +37,7 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, '../dist/bookmag')));
 app.use('/', express.static(path.join(__dirname, '../dist/bookmag')));
+app.use(express.static('assets'));
 
 app.use('/api/products', productsRoute)
 

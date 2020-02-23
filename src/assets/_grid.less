@@ -21,13 +21,19 @@
     }
   }
 
-  .row,
+  .row{
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -@row-gutter;
+    margin-left: -@row-gutter;
+  }
   .column {
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    margin-right: -@gutter;
-    margin-left: -@gutter;
+    margin-right: -@col-gutter;
+    margin-left: -@col-gutter;
   }
 }
 [class^="column-"] {
@@ -35,8 +41,8 @@
   // Set flex-grow and shrink to 0 so that these columns always have the size we tell them in the loop
   flex-grow: 0;
   flex-shrink: 0;
-  padding-right: @gutter / 2; // Set paddings to half the gutter for a little spacing
-  padding-left: @gutter / 2;
+  padding-right: @col-gutter / 2; // Set paddings to half the gutter for a little spacing
+  padding-left: @col-gutter / 2;
   margin-bottom: 2rem;
 }
 .grid-generate(@cols);

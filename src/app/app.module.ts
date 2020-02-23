@@ -21,6 +21,8 @@ import {NotificationsModule} from './notifications/notifications.module';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import {FileSelectDirective} from 'ng2-file-upload';
 import { CheckboxComponent } from './checkbox/checkbox.component';
+import {CartEffects} from './store/effects/cart.effects';
+import { CartComponent } from './cart/cart.component';
 
 
 @NgModule({
@@ -29,6 +31,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
     BreadcrumbsComponent,
     FileSelectDirective,
     CheckboxComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
     FontAwesomeModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([UserEffects, ProductEffects]),
+    EffectsModule.forRoot([UserEffects, ProductEffects, CartEffects]),
     StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
     StoreDevtoolsModule.instrument()
   ],
