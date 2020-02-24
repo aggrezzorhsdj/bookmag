@@ -6,7 +6,8 @@ const express = require('express'),
   dbConfig = require('./database/db'),
   config = require('./config/config'),
   createError = require('http-errors'),
-  multer = require('multer')
+  multer = require('multer'),
+  sendMail = require('nodemailer')
 
 
 mongoose.Promise = global.Promise;
@@ -25,6 +26,8 @@ mongoose.connect(dbConfig.dbremote, {
 
 const productsRoute = require('./routes/products.route')
 const usersRoute = require('./routes/users.route');
+const emailRoute = require('./routes/email.route');
+const orderRoute = require('./routes/order.route');
 
 const app = express();
 
@@ -42,6 +45,10 @@ app.use(express.static('assets'));
 app.use('/api/products', productsRoute)
 
 app.use('/api/users/', usersRoute);
+
+app.use('/api/mail/', emailRoute);
+
+app.use('/api/order/', orderRoute);
 
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
