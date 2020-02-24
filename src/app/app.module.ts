@@ -19,7 +19,6 @@ import {GetDataService} from './services/get-data.service';
 import {ProductEffects} from './store/effects/product.effects';
 import {NotificationsModule} from './notifications/notifications.module';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
-import {FileSelectDirective} from 'ng2-file-upload';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import {CartEffects} from './store/effects/cart.effects';
 import { CartComponent } from './cart/cart.component';
@@ -30,7 +29,6 @@ import {CheckoutEffects} from './store/effects/checkout.effects';
   declarations: [
     AppComponent,
     BreadcrumbsComponent,
-    FileSelectDirective,
     CheckboxComponent,
     CartComponent
   ],
