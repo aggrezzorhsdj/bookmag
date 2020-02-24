@@ -18,9 +18,9 @@
       </li>
       <li class="nav__navbar__item nav__navbar__item">
 
-        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="!authService.logIn"  routerLinkActive="active" routerLink="/login">Вход</a>
-        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="authService.logIn"  routerLinkActive="active" routerLink="/login" (click)="authService.logout()">Выход</a>
-        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="authService.logIn" routerLinkActive="active" routerLink="/profile">Профиль</a>
+        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="!this.isLogin"  routerLinkActive="active" routerLink="/login">Вход</a>
+        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="this.isLogin"  routerLinkActive="active" routerLink="/login" (click)="this.logOut()">Выход</a>
+        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="this.isLogin" routerLinkActive="active" routerLink="/profile">Профиль</a>
       </li>
       <li class="nav__navbar__item nav__navbar__item">
         <a class="a-theme a-theme nav__navbar__item__link" routerLink="cart">Корзина</a>

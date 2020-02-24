@@ -1,5 +1,4 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -9,6 +8,12 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'Bookmag';
+  isLogin = false;
   constructor(private authService: AuthService) { }
-  ngOnInit() {}
+  ngOnInit() {
+    this.isLogin = this.authService.logIn;
+  }
+  logOut() {
+    this.authService.logout();
+  }
 }
