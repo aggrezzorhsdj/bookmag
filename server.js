@@ -1,4 +1,4 @@
-const express = require('express'),
+const express = require('express')
   path = require('path'),
   mongoose = require('mongoose'),
   cors = require('cors'),
