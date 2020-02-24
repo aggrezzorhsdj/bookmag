@@ -19,7 +19,7 @@ import {AddToCart} from '../store/actions/cart.actions';
 })
 export class ProductsComponent implements OnInit {
   title = 'Каталог продукции';
-  assetsUrl = 'http://localhost:4000/images/'
+  assetsUrl = '/images/'
   products$;
   currency = '₽';
   constructor(

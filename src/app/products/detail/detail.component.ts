@@ -16,7 +16,7 @@ import {IProduct} from '../../interfaces/product.interface';
 export class DetailComponent implements OnInit {
   product$;
   currency = '₽';
-  assetsUrl = 'http://localhost:4000/images/'
+  assetsUrl = '/images/'
   constructor(
       private store: Store<IAppState>,
       private router: Router,
