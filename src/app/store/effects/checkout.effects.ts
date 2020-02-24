@@ -6,20 +6,24 @@ import {Router} from '@angular/router';
 import {CreateCheckout, CreateCheckoutSuccess, ECheckoutActions} from '../actions/checkout.actions';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {CheckoutService} from '../../services/checkout.service';
-import {getCart} from '../selectors/cart.selectors';
 import {CreateProductError} from '../actions/product.actions';
 import {of} from 'rxjs';
-
+import {ICheckoutState} from '../state/checkout.state';
+import {Injectable} from '@angular/core';
+import {CartService} from '../../services/cart.service';
+@Injectable()
 export class CheckoutEffects {
     @Effect()
     createCheckout$ = this.actions$.pipe(
         ofType<CreateCheckout>(ECheckoutActions.CreateCheckout),
         switchMap((data) => {
-            return this.checkoutService.createOrder(data.payload).pipe(
+            console.log(data);
+            return this.checkout.createOrder(data.payload).pipe(
                 map(res => {
-                    this.checkoutService.sendMail(res);
+                    this.checkout.sendMail(data.payload);
                     this.notify.notify('Заказ оформлен', 1);
-                    this.router.navigate(['books']);
+                    this.router.navigate(['products']);
+                    this.cartService.clearCart();
                     return new CreateCheckoutSuccess(res);
                 }),
                 catchError(err => of(new CreateProductError(err)))
@@ -27,11 +31,12 @@ export class CheckoutEffects {
         }),
     )
     constructor(
-        private store: Store<IAppState>,
         private actions$: Actions,
-        private checkoutService: CheckoutService,
+        private checkout: CheckoutService,
+        private store: Store<ICheckoutState>,
         private notify: NotificationsService,
-        private router: Router
+        private router: Router,
+        private cartService: CartService
     ) {
     }
 }

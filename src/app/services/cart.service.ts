@@ -13,6 +13,7 @@ export class CartService {
     const arr: ICart[] = [];
     const existing = localStorage.getItem('cart');
     let isExist = false;
+    console.log(existing);
     if (existing !== null) {
       const obj = JSON.parse(existing);
       for (const i of obj) {
@@ -24,8 +25,6 @@ export class CartService {
         obj.push(product);
       } else {
         obj.map(value => {
-          console.log(value.product);
-          console.log(product.product);
           return value.product._id === product.product._id ? value.count++ : value.count;
         });
       }
@@ -43,15 +42,19 @@ export class CartService {
   }
 
   clearCart() {
-    this.items = [];
-    return this.items;
+    localStorage.removeItem('cart');
   }
   constructor() { }
 
   removeFromCart(id: number): Observable<ICart[]> {
     const cart = JSON.parse(localStorage.getItem('cart'));
-    const newCart = cart.splice(id, 1);
-    localStorage.setItem('cart', JSON.stringify(newCart));
-    return of(newCart);
+    cart.splice(id, 1);
+    if (cart.length !== 0) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    } else {
+      localStorage.removeItem('cart');
+    }
+    console.log(cart);
+    return of(cart);
   }
 }

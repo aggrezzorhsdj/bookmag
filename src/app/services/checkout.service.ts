@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {ICheckout} from '../interfaces/checkout.interface';
@@ -12,28 +12,25 @@ export class CheckoutService {
   constructor(
       private http: HttpClient
   ) { }
-
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
   sendMail(body) {
     let products = '';
+    console.log(body);
     for (const product of body.products) {
-      products += `${product.article} ${product.title} ${product.price} of count ${product.count}<br>`;
+      products += `<div>${product.title} ${product.price} руб. в количестве ${product.count}</div>`;
     }
-    const template = `
-      <div>Hello ${body.name}. You chekout new order on site bookmag.</div>
-      <div>${products}</div>
-    `;
+    const template = `text`;
     const data = {
       name: body.name,
       email: body.email,
       subject: 'new order',
-      text: template
+      text: `<h1>Привет! Вы заказали товар в магазине Bookmag</h1> ${products}`
     }
-    return this.http.post(`${this.url}mail/send`, data).pipe(
-        catchError(this.errorMgmt)
-    );
+    console.log(`${this.url}mail/send`);
+    return this.http.post('http://localhost:4000/api/mail/send', data).subscribe();
   }
   createOrder(checkout: ICheckout): Observable<ICheckout> {
-    return this.http.post<ICheckout>(`${this.url}order/send`, checkout).pipe(
+    return this.http.post<ICheckout>(`${this.url}order/create`, checkout).pipe(
         catchError(this.errorMgmt)
     );
   }

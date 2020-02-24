@@ -43,11 +43,8 @@ app.use('/', express.static(path.join(__dirname, '../dist/bookmag')));
 app.use(express.static('assets'));
 
 app.use('/api/products', productsRoute)
-
 app.use('/api/users/', usersRoute);
-
 app.use('/api/mail/', emailRoute);
-
 app.use('/api/order/', orderRoute);
 
 const port = process.env.PORT || 4000;

@@ -1,21 +1,42 @@
 const express = require('express');
+const app = express();
+const emailRoute = express.Router();
 const multer = require('multer');
 const path = require('path');
-const sendMail = require('nodemailer');
-const app = express();
-const emailRouter = express.Router();
+const nodemailer = require('nodemailer');
 
-emailRouter.route('/send').post((req, res) => {
-    console.log('sending email');
+const sendMail = (user, callback) => {
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        secure: false,
+        auth: {
+            user: "webmaster.dmty@gmail.com",
+            pass: "azrwXAeX1997"
+        }
+    });
+    const mailOptions = {
+        from: `Bookmag <webmaster.dmty@gmail.com>`,
+        to: user.email,
+        subject: user.subject,
+        html: user.text
+    };
+
+    transporter.sendMail(mailOptions, callback);
+}
+
+emailRoute.route('/send').post((req, res, next) => {
     let user = req.body;
+    console.log(user);
     sendMail(user, (err, info) => {
         if (err) {
             console.log(err);
-            res.status(400);
             res.send({ error: "Failed to send email" });
         } else {
             console.log("Email has been sent");
             res.send(info);
+            transport.close();
         }
     });
 });
+
+module.exports = emailRoute;

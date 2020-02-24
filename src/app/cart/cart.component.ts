@@ -18,11 +18,7 @@ export class CartComponent implements OnInit {
   cart$;
   title = 'Корзина';
   submitted = false;
-  form: FormGroup = this.fb.group({
-    name: ['', [Validators.required]],
-    address: ['', [Validators.required]],
-    email: ['', [Validators.required]],
-  })
+  form: FormGroup;
   constructor(
       private router: Router,
       private fb: FormBuilder,
@@ -33,6 +29,11 @@ export class CartComponent implements OnInit {
     this.store.dispatch(new GetCart());
   }
   ngOnInit() {
+    this.form = this.fb.group({
+      name: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    })
     this.getCart();
     this.cart$ = this.store.select(getCart);
   }
@@ -47,15 +48,21 @@ export class CartComponent implements OnInit {
               name: this.form.get('name').value,
               address: this.form.get('address').value,
               email: this.form.get('email').value,
-              products: data
+              products: data.map(value => {
+                return {title: value.product.title, count: value.count, price: value.product.price};
+              }),
+              summary: data.map(value => value.product.price).reduce((val, current) => val + current)
             };
             this.store.dispatch(new CreateCheckout(order));
           },
           err => err
-      );
+      )
+          .unsubscribe();
     }
   }
-
+  get myForm() {
+    return this.form.controls;
+  }
   removeFromCart(id: number) {
     this.store.dispatch(new RemoveFromCart(id));
   }

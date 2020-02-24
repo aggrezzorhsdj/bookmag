@@ -11,7 +11,7 @@
                             </div>
                             <div class="product__body">
                                 <div class="product__article">Артикул: {{product.article}}</div>
-                                <div class="product__title"><a routerLink="/products/{{product._id}}">{{product.title}}</a></div>
+                                <div class="product__title"><a routerLink="/products/detail/{{product._id}}">{{product.title}}</a></div>
                                 <div class="product__price">
                                     <span class="product__price__main">{{product.price}} {{this.currency}} </span>
                                     <span class="product__price__old"><del>{{product.old_price}}</del></span>

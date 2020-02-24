@@ -23,6 +23,7 @@ import {FileSelectDirective} from 'ng2-file-upload';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import {CartEffects} from './store/effects/cart.effects';
 import { CartComponent } from './cart/cart.component';
+import {CheckoutEffects} from './store/effects/checkout.effects';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import { CartComponent } from './cart/cart.component';
     FontAwesomeModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([UserEffects, ProductEffects, CartEffects]),
+    EffectsModule.forRoot([UserEffects, ProductEffects, CartEffects, CheckoutEffects]),
     StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
     StoreDevtoolsModule.instrument()
   ],

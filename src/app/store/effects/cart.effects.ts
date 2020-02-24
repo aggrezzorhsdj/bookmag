@@ -44,6 +44,7 @@ export class CartEffects {
         switchMap((data) => {
             return this.cartService.removeFromCart(data.payload).pipe(
                 map((res: ICart[]) => {
+                    this.store.dispatch(new GetCart());
                     return new RemoveFromCartSuccess(res);
                 })
             );

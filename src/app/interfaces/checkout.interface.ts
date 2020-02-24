@@ -4,5 +4,6 @@ export class ICheckout {
     name: string;
     address: string;
     email: string;
-    products: ICart[];
+    products: {title: string; count: number, price: number}[];
+    summary: number;
 }

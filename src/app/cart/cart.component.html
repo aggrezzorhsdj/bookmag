@@ -1,5 +1,5 @@
 <h1>{{title}}</h1>
-<div class="container">
+<div class="container" *ngIf="cart$ | async as cart">
     <div class="row">
         <div class="column-12">
             <table class="table">
@@ -14,10 +14,62 @@
                     <td>{{cart.product.title}}</td>
                     <td>{{cart.product.description}}</td>
                     <td>{{cart.product.price}} <del>{{cart.product.old_price}}</del></td>
-                    <td><a (click)="this.removeFromCart(i)" class="a-theme">Удалить</a></td>
+                    <td><a (click)="this.removeFromCart(i)" data-id="{{i}}" class="a-theme">Удалить</a></td>
                 </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="row">
+        <div class="column-12"><div class="heading-4">Офрмление заказа</div></div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <form class="form" [formGroup]="this.form" (submit)="onSubmit()">
+                <div class="row">
+                    <div class="column-6">
+                        <div class="form__group">
+                            <input class="form__input" [class.form__input_invalid]="myForm.name.touched && myForm.name.invalid" id="name" formControlName="name" placeholder="ФИО"/>
+                            <label for="name">ФИО</label>
+                            <div class="invalid-control" *ngIf="submitted && myForm.name.errors?.required">
+                                Введите ФИО
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-6">
+                        <div class="form__group">
+                            <input class="form__input" [class.form__input_invalid]="myForm.address.touched && myForm.address.invalid" id="address" formControlName="address" placeholder="Адрес"/>
+                            <label for="address">Адрес</label>
+                            <div class="invalid-control" *ngIf="submitted && myForm.address.errors?.required">
+                                Введите Адрес
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-6">
+                        <div class="form__group">
+                            <input class="form__input" [class.form__input_invalid]="myForm.email.touched && myForm.email.invalid" id="email" formControlName="email" placeholder="E-mail"/>
+                            <label for="address">E-mail</label>
+                            <div class="invalid-control" *ngIf="submitted && myForm.email.errors?.pattern">
+                                E-mail введене неверно
+                            </div>
+                            <div class="invalid-control" *ngIf="submitted && myForm.email.errors?.required">
+                                Введите E-mail
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-12">
+                        <button class="button" type="submit">Заказать</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="!(cart$ | async)">
+    <div class="cart__emtpy">
+        <div class="heading-2">
+            Ваша корзина пуста
+        </div>
+        <p>Перейдите в <a routerLink="/products" class="a-theme-blue">наш каталог</a> для просмотра всего ассортимента</p>
     </div>
 </div>

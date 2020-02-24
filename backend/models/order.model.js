@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
-const Product = require('./products.model');
-const ProductSchema = mongoose.model('Product').schema;
 
 const Order = new Schema({
     name: {
@@ -17,10 +14,16 @@ const Order = new Schema({
         type: String,
         required: true,
     },
-    products: [{
-        product: ProductSchema,
-        count: Number
-    }],
+    products: [
+        {
+            title: String,
+            price: Number,
+            count: Number
+        }
+    ],
+    summary: {
+        type: Number
+    }
 });
 
 module.exports = mongoose.model("Order", Order);

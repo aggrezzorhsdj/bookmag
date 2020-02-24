@@ -5,10 +5,12 @@ import {IAppState} from '../state/app.state';
 import {userReducers} from './user.reducers';
 import {productReducers} from './product.reducers';
 import {cartReducers} from './cart.reducers';
+import {checkoutReducers} from './checkout.reducers';
 
 export const appReducers: ActionReducerMap<IAppState, any> = {
   router: routerReducer,
   users: userReducers,
   products: productReducers,
-  cart: cartReducers
+  cart: cartReducers,
+  checkout: checkoutReducers
 };
