@@ -38,14 +38,19 @@ app.use(bodyParser.urlencoded({
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, '../dist/bookmag')));
-app.use('/', express.static(path.join(__dirname, '../dist/bookmag')));
-app.use(express.static('assets'));
+
 
 app.use('/api/products', productsRoute)
 app.use('/api/users/', usersRoute);
 app.use('/api/mail/', emailRoute);
 app.use('/api/order/', orderRoute);
+
+app.use(express.static(__dirname + '/dist/bookmag'));
+app.use(express.static('assets'));
+// Send all requests to index.html
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname + '/dist/bookmag/index.html'));
+});
 
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
