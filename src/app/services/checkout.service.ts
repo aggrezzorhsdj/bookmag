@@ -8,7 +8,7 @@ import {ICheckout} from '../interfaces/checkout.interface';
   providedIn: 'root'
 })
 export class CheckoutService {
-  url = 'http://localhost:4000/api/';
+  url = '/api/';
   constructor(
       private http: HttpClient
   ) { }

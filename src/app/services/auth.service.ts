@@ -9,7 +9,7 @@ import {IUser} from '../interfaces/user.interface';
   providedIn: 'root'
 })
 export class AuthService {
-  api = 'http://localhost:4000/api';
+  api = '/api';
   token: string;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient, private router: Router) { }

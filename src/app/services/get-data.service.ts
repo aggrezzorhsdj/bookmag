@@ -10,7 +10,7 @@ import {IProduct} from '../interfaces/product.interface';
   providedIn: 'root'
 })
 export class GetDataService {
-  api = 'http://localhost:4000/api';
+  api = '/api';
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   userId: string = localStorage.getItem('userId');
