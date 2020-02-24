@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {IUser} from '../interfaces/user.interface';
-import {IProduct} from "../interfaces/product.interface";
-import {IProductHttp} from "../interfaces/user-http.interface";
+import {IProduct} from '../interfaces/product.interface';
 
 @Injectable({
   providedIn: 'root'
