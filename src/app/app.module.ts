@@ -5,7 +5,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
 
-import {appReducers} from './store/reducers/app.reducers';
+import {appReducers, reducerProvider, REDUCERS_TOKEN} from './store/reducers/app.reducers';
 import {UserEffects} from './store/effects/user.effects';
 
 
@@ -32,7 +32,7 @@ import {CheckoutEffects} from './store/effects/checkout.effects';
     BreadcrumbsComponent,
     FileSelectDirective,
     CheckboxComponent,
-    CartComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -43,12 +43,12 @@ import {CheckoutEffects} from './store/effects/checkout.effects';
     HttpClientModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot(appReducers),
+    StoreModule.forRoot(REDUCERS_TOKEN),
     EffectsModule.forRoot([UserEffects, ProductEffects, CartEffects, CheckoutEffects]),
     StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
     StoreDevtoolsModule.instrument()
   ],
-  providers: [GetDataService],
+  providers: [GetDataService, reducerProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

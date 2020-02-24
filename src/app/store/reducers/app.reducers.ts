@@ -6,6 +6,7 @@ import {userReducers} from './user.reducers';
 import {productReducers} from './product.reducers';
 import {cartReducers} from './cart.reducers';
 import {checkoutReducers} from './checkout.reducers';
+import {InjectionToken} from '@angular/core';
 
 export const appReducers: ActionReducerMap<IAppState, any> = {
   router: routerReducer,
@@ -14,3 +15,6 @@ export const appReducers: ActionReducerMap<IAppState, any> = {
   cart: cartReducers,
   checkout: checkoutReducers
 };
+
+export const REDUCERS_TOKEN = new InjectionToken<ActionReducerMap<IAppState>>('App Reducers');
+export const reducerProvider = { provide: REDUCERS_TOKEN, useValue: appReducers };
