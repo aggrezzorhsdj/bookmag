@@ -1,5 +1,7 @@
 import {IProduct} from './product.interface';
 
-export class IProductHttp {
-    products: IProduct[];
+export class UserLogin {
+    login: string;
+    password: string;
+    token: string;
 }

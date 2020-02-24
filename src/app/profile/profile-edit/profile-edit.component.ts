@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {GetDataService} from '../../services/get-data.service';
-import {User} from '../../models/user';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
@@ -18,7 +17,7 @@ import {NotificationsService} from '../../notifications/notifications.service';
 })
 export class ProfileEditComponent implements OnInit {
   userId: string = localStorage.getItem('userId');
-  userData: User;
+  userData: IUser;
   userEditForm: FormGroup = this.fb.group({
     login: ['', [Validators.required]],
     email: ['', [Validators.required]],
