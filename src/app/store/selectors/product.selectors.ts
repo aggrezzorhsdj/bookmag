@@ -12,11 +12,9 @@ export const selectProductList = createSelector(
 
 export const selectProductCategoryList = createSelector(
     selectProducts,
-    (state: IProductState) => state.products
-        .sort((a, b) => {
+    (state: IProductState) => state.products.sort((a, b) => {
             return a.category < b.category ? -1 : 1;
-        })
-        .reduce((arr, el) => {
+        }).reduce((arr, el) => {
             if (!arr.length || arr[arr.length - 1].category !== el.category) {
                 arr.push(el);
             }
