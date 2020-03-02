@@ -9,7 +9,6 @@
         <div class="column-9">
             <table class="table">
                 <thead>
-                <th>ID</th>
                 <th>Артикул</th>
                 <th>Название</th>
                 <th>Описание</th>
@@ -21,7 +20,6 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let product of products$ | async; let id = index">
-                    <td>{{product._id}}</td>
                     <td>{{product.article}}</td>
                     <td>{{product.title}}</td>
                     <td>{{product.description}}</td>
@@ -35,9 +33,9 @@
             </table>
         </div>
         <div class="column-3">
-            <select class="form__input form__input_select" (change)="getProductsOnCategory($event)">
+            <select class="form__input form__input_select" (change)="getProductsOnCategory($event)" >
                 <option value="default">Категория</option>
-                <option value="Фантастика">Фантастика</option>
+                <option *ngFor="let product of products$ | async; let id = index" value="{{product.category}}">{{product.category}}</option>
             </select>
             <select class="form__input form__input_select" (change)="getProductsOnPrice($event)">
                 <option value="" selected disabled>По цене</option>

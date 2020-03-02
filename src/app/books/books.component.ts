@@ -11,6 +11,7 @@ import {
 import {IProduct} from '../interfaces/product.interface';
 import {IProductHttp} from '../interfaces/user-http.interface';
 import {CheckboxItem} from '../checkbox/checkbox-item';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-books',
@@ -20,6 +21,7 @@ import {CheckboxItem} from '../checkbox/checkbox-item';
 export class BooksComponent implements OnInit {
   title = 'Книги';
   products$;
+  categories$;
   categoriesOptions = new Array<CheckboxItem>();
   constructor(
     private store: Store<IAppState>,

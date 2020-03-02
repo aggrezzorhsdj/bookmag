@@ -12,9 +12,15 @@ import {CartComponent} from './cart/cart.component';
 const appRoute: Routes = [
   {path: '', component: MainComponent, pathMatch: 'full'},
   {path: 'login', data: { breadcrumb: 'Вход' }, component: LoginComponent},
-  {path: 'profile', data: { breadcrumb: 'Профиль' }, loadChildren: './profile/profile.module#ProfileModule'},
-  {path: 'books', data: { breadcrumb: 'Книги' }, loadChildren: './books/books.module#BooksModule'},
-  {path: 'products', data: { breadcrumb: 'Каталог' }, loadChildren: './products/products.module#ProductsModule'},
+  {
+    path: 'profile',
+    data: {
+      breadcrumb: 'Профиль'
+    },
+    loadChildren: './profile/profile.module#ProfileModule'
+  },
+  {path: 'books', data: {breadcrumb: 'Книги'}, loadChildren: './books/books.module#BooksModule'},
+  {path: 'products', data: {breadcrumb: 'Каталог'}, loadChildren: './products/products.module#ProductsModule'},
   {path: 'cart', data: { breadcrumb: 'Корзина' }, component: CartComponent},
   {path: '**', data: { breadcrumb: '404' }, component: PageNotFoundComponent},
 ];

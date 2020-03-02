@@ -12,7 +12,10 @@ export class AuthService {
   api = '/api';
   token: string;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+      private http: HttpClient,
+      private router: Router
+  ) { }
   login(data): Observable<IUser> {
     return this.http.post<IUser>(`${this.api}/users/authenticate`, data).pipe(
         map(

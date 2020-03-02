@@ -75,4 +75,5 @@ export class GetDataService {
     formData.append('file', file, file.name);
     return this.http.post<string>(url, formData);
   }
+
 }
