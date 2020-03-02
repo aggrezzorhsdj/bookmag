@@ -16,6 +16,7 @@ export const selectProductCategoryList = createSelector(
         if (!arr.length || arr[arr.length - 1].category !== el.category) {
             arr.push(el);
         }
+        console.log(arr);
         return arr;
     }, [])
 )
