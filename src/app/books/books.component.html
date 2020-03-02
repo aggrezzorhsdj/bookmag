@@ -35,7 +35,7 @@
         <div class="column-3">
             <select class="form__input form__input_select" (change)="getProductsOnCategory($event)" >
                 <option value="default">Категория</option>
-                <option *ngFor="let product of products$ | async; let id = index" value="{{product.category}}">{{product.category}}</option>
+                <option *ngFor="let category of categories$ | async; let id = index" value="{{category.category}}">{{category.category}}</option>
             </select>
             <select class="form__input form__input_select" (change)="getProductsOnPrice($event)">
                 <option value="" selected disabled>По цене</option>

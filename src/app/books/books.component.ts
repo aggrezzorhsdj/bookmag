@@ -4,6 +4,7 @@ import {IAppState} from '../store/state/app.state';
 import {Router} from '@angular/router';
 import {GetProducts, RemoveProduct} from '../store/actions/product.actions';
 import {
+  selectProductCategoryList,
   selectProductList,
   selectProductListWithCategory, selectProductListWithPrice,
   selectSelectedProduct
@@ -50,6 +51,9 @@ export class BooksComponent implements OnInit {
   }
   navigateEdit(id: string) {
     this.router.navigate(['/books/edit', id]);
+  }
+  getProductCategories() {
+    this.categories$ = this.store.pipe(select(selectProductCategoryList));
   }
 
     remove(id: string) {
