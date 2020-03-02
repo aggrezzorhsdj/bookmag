@@ -32,6 +32,7 @@ export class BooksComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new GetProducts());
     this.getProducts();
+    this.getProductCategories();
   }
 
   getProducts() {
