@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { AuthService } from './services/auth.service';
+import {faShoppingBasket, faUser} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,10 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit {
   title = 'Bookmag';
   isLogin = false;
+  faShoppingCart = faShoppingBasket;
+  faUser = faUser;
   constructor(private authService: AuthService) { }
   ngOnInit() {
-    this.isLogin = this.authService.logIn;
   }
   logOut() {
     this.authService.logout();

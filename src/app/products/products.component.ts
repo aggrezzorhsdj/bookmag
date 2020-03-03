@@ -11,6 +11,7 @@ import {GetProducts} from '../store/actions/product.actions';
 import {ICart} from '../interfaces/cart.interface';
 import {IProduct} from '../interfaces/product.interface';
 import {AddToCart} from '../store/actions/cart.actions';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-products',
@@ -19,7 +20,7 @@ import {AddToCart} from '../store/actions/cart.actions';
 })
 export class ProductsComponent implements OnInit {
   title = 'Каталог продукции';
-  assetsUrl = '/images/'
+  assetsUrl = environment.assetsUrl;
   products$;
   currency = '₽';
   constructor(

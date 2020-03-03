@@ -4,15 +4,10 @@ import {IAppState} from '../store/state/app.state';
 import {Router} from '@angular/router';
 import {GetProducts, RemoveProduct} from '../store/actions/product.actions';
 import {
-  selectProductCategoryList,
   selectProductList,
   selectProductListWithCategory, selectProductListWithPrice,
-  selectSelectedProduct
 } from '../store/selectors/product.selectors';
-import {IProduct} from '../interfaces/product.interface';
-import {IProductHttp} from '../interfaces/user-http.interface';
 import {CheckboxItem} from '../checkbox/checkbox-item';
-import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-books',
@@ -32,7 +27,6 @@ export class BooksComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new GetProducts());
     this.getProducts();
-    this.getProductCategories();
   }
 
   getProducts() {
@@ -52,9 +46,6 @@ export class BooksComponent implements OnInit {
   }
   navigateEdit(id: string) {
     this.router.navigate(['/books/edit', id]);
-  }
-  getProductCategories() {
-    this.categories$ = this.store.pipe(select(selectProductCategoryList));
   }
 
     remove(id: string) {

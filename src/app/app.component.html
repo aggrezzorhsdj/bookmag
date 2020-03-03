@@ -7,23 +7,21 @@
       <li class="nav__navbar__item">
         <a class="a-theme nav__navbar__item__link" routerLink="products">Книги</a>
       </li>
-      <li class="nav__navbar__item">
-        <a class="a-theme nav__navbar__item__link">Бестселлеры</a>
-      </li>
-      <li class="nav__navbar__item">
-        <a class="a-theme nav__navbar__item__link">Канцтовары</a>
-      </li>
-      <li class="nav__navbar__item nav__navbar__item__search">
-          <input class="form__input input_default form__input__search" name="main_search" placeholder="Поиск книг"/>
-      </li>
-      <li class="nav__navbar__item nav__navbar__item">
+<!--      <li class="nav__navbar__item">-->
+<!--        <a class="a-theme nav__navbar__item__link">Бестселлеры</a>-->
+<!--      </li>-->
+<!--      <li class="nav__navbar__item">-->
+<!--        <a class="a-theme nav__navbar__item__link">Канцтовары</a>-->
+<!--      </li>-->
+<!--      <li class="nav__navbar__item nav__navbar__item__search">-->
+<!--          <input class="form__input input_default form__input__search" name="main_search" placeholder="Поиск книг"/>-->
+<!--      </li>-->
+      <li class="nav__navbar__item nav__navbar__item__last">
 
-        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="!this.isLogin"  routerLinkActive="active" routerLink="/login">Вход</a>
-        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="this.isLogin"  routerLinkActive="active" routerLink="/login" (click)="this.logOut()">Выход</a>
-        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="this.isLogin" routerLinkActive="active" routerLink="/profile">Профиль</a>
-      </li>
-      <li class="nav__navbar__item nav__navbar__item">
-        <a class="a-theme a-theme nav__navbar__item__link" routerLink="cart">Корзина</a>
+        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="!authService.logIn"  routerLinkActive="active" routerLink="/login">Вход</a>
+        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="authService.logIn"  routerLinkActive="active" routerLink="/login" (click)="this.logOut()">Выход</a>
+        <a class="a-theme a-theme nav__navbar__item__link" *ngIf="authService.logIn" routerLinkActive="active" routerLink="/profile"><fa-icon [icon]="faUser"></fa-icon></a>
+        <a class="a-theme a-theme nav__navbar__item__link" routerLink="cart"><fa-icon [icon]="faShoppingCart"></fa-icon></a>
       </li>
     </ul>
   </nav>

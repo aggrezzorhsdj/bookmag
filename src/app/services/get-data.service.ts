@@ -5,12 +5,13 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {IUser} from '../interfaces/user.interface';
 import {IProduct} from '../interfaces/product.interface';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetDataService {
-  api = '/api';
+  api = environment.apiUrl;
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   userId: string = localStorage.getItem('userId');

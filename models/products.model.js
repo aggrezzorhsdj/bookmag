@@ -31,8 +31,7 @@ const Product = new Schema({
     default: 0
   },
   category:{
-    type: String,
-    default: 'default'
+    type: String
   }
 });
 

@@ -5,18 +5,57 @@
             <a type="button" class="button" routerLink="/books/add">Добавить новую</a>
         </div>
     </div>
+<!--    <div class="row">-->
+<!--        <div class="column-md-9">-->
+<!--            <div class="table-responsive">-->
+<!--                <div class="table-responsive__header">-->
+<!--                    <div class="table-responsive__header__item">Артикул</div>-->
+<!--                    <div class="table-responsive__header__item">Название</div>-->
+<!--                    <div class="table-responsive__header__item">Описание</div>-->
+<!--                    <div class="table-responsive__header__item">Категория</div>-->
+<!--                    <div class="table-responsive__header__item">Цена</div>-->
+<!--                    <div class="table-responsive__header__item">Старая цена</div>-->
+<!--                    <div class="table-responsive__header__item"></div>-->
+<!--                    <div class="table-responsive__header__item"></div>-->
+<!--                </div>-->
+<!--                <div class="table-responsive__body">-->
+<!--                    <div class="table-responsive__row" *ngFor="let product of products$ | async; let id = index">-->
+<!--                        <div class="table-responsive__item">{{product.article}}</div>-->
+<!--                        <div class="table-responsive__item">{{product.title}}</div>-->
+<!--                        <div class="table-responsive__item">{{product.description}}</div>-->
+<!--                        <div class="table-responsive__item">{{product.category}}</div>-->
+<!--                        <div class="table-responsive__item">{{product.price}}</div>-->
+<!--                        <div class="table-responsive__item">{{product.old_price}}</div>-->
+<!--                        <div class="table-responsive__item"><a (click)="this.navigateEdit(product._id)" class="a-theme">Изменить</a></div>-->
+<!--                        <div class="table-responsive__item"><a (click)="this.remove(product._id)" class="a-theme">Удалить</a></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="column-md-3">-->
+<!--            <select class="form__input form__input_select" (change)="getProductsOnCategory($event)" >-->
+<!--                <option value="default">Категория</option>-->
+<!--                <option value="Фантастика">Фантастика</option>-->
+<!--            </select>-->
+<!--            <select class="form__input form__input_select" (change)="getProductsOnPrice($event)">-->
+<!--                <option value="" selected disabled>По цене</option>-->
+<!--                <option value="asc">По возрастанию</option>-->
+<!--                <option value="desc">По убыванию</option>-->
+<!--            </select>-->
+<!--        </div>-->
+<!--    </div>-->
     <div class="row">
-        <div class="column-9">
+        <div class="column-md-10">
             <table class="table">
                 <thead>
-                <th>Артикул</th>
-                <th>Название</th>
-                <th>Описание</th>
-                <th>Категория</th>
-                <th>Цена</th>
-                <th>Старая цена</th>
-                <th></th>
-                <th></th>
+                <th scope="col">Артикул</th>
+                <th scope="col">Название</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Категория</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Старая цена</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
                 </thead>
                 <tbody>
                 <tr *ngFor="let product of products$ | async; let id = index">
@@ -32,10 +71,10 @@
                 </tbody>
             </table>
         </div>
-        <div class="column-3">
+        <div class="column-md-2">
             <select class="form__input form__input_select" (change)="getProductsOnCategory($event)" >
                 <option value="default">Категория</option>
-                <option *ngFor="let category of categories$ | async; let id = index" value="{{category.category}}">{{category.category}}</option>
+                <option value="Фантастика">Фантастика</option>
             </select>
             <select class="form__input form__input_select" (change)="getProductsOnPrice($event)">
                 <option value="" selected disabled>По цене</option>

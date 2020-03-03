@@ -8,6 +8,33 @@
   .col-offset-@{counter} {
     margin-left: ~"@{width}%";
   }
+  .column-md-@{counter}{
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+  .column-sm-@{counter}{
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+
   .grid-generate((@counter - 1));
 }
+
+.media-generate(@counter) when (@counter > 0){
+  @width: (@counter / @cols) * 100;
+  @media (min-width: 992px) {
+    .column-md-@{counter}{
+      max-width: ~"@{width}%";
+      flex: 0 0 ~"@{width}%";
+    }
+  }
+  @media (min-width: 768px) {
+    .column-sm-@{counter}{
+      max-width: ~"@{width}%";
+      flex: 0 0 ~"@{width}%";
+    }
+  }
+  .media-generate((@counter - 1));
+}
+
 

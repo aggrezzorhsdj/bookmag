@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import {Observable, of, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {IUser} from '../interfaces/user.interface';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  api = '/api';
+  api = environment.apiUrl;
   token: string;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(
