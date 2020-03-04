@@ -30,7 +30,7 @@ import {CheckoutEffects} from './store/effects/checkout.effects';
     AppComponent,
     BreadcrumbsComponent,
     CheckboxComponent,
-    CartComponent
+    CartComponent,
   ],
   imports: [
     BrowserModule,
