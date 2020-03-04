@@ -7,6 +7,7 @@ import {GetProduct} from '../../store/actions/product.actions';
 import {AddToCart} from '../../store/actions/cart.actions';
 import {ICart} from '../../interfaces/cart.interface';
 import {IProduct} from '../../interfaces/product.interface';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-detail',
@@ -16,7 +17,7 @@ import {IProduct} from '../../interfaces/product.interface';
 export class DetailComponent implements OnInit {
   product$;
   currency = '₽';
-  assetsUrl = '/images/'
+  assetsUrl = environment.assetsUrl
   constructor(
       private store: Store<IAppState>,
       private router: Router,

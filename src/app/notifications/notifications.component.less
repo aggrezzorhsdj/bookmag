@@ -17,10 +17,12 @@
       z-index: 2001;
       margin: 0 auto;
       box-sizing: border-box;
+      margin-bottom: 2rem;
       & > .notification__inner {
         padding: 2rem 4rem;
         border-radius: 0.4rem;
         border: 0.1rem solid;
+        position: relative;
         &.danger{
           border-color: @info-danger;
           box-shadow: 0 0 2rem 0.2rem rgba(0,0,0,0.2);
@@ -50,6 +52,8 @@
           top: 0.2rem;
           right: 0.2rem;
           outline: none;
+          cursor: pointer;
+          font-size: 1.8rem;
           &:focus, &:active {
             outline: none;
             color:@black;

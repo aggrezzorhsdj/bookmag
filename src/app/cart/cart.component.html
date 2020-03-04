@@ -7,6 +7,7 @@
                     <th>Название</th>
                     <th>Описание</th>
                     <th>Цена</th>
+                    <th>Количество</th>
                     <th></th>
                 </thead>
                 <tbody>
@@ -14,6 +15,7 @@
                     <td>{{cart.product.title}}</td>
                     <td>{{cart.product.description}}</td>
                     <td>{{cart.product.price}} <del>{{cart.product.old_price}}</del></td>
+                    <td>{{cart.count}}</td>
                     <td><a (click)="this.removeFromCart(i)" data-id="{{i}}" class="a-theme">Удалить</a></td>
                 </tr>
                 </tbody>

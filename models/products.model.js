@@ -6,7 +6,7 @@ const Product = new Schema({
   title: {
     type: String,
     required: true,
-    maxlength: 30
+    maxlength: 100
   },
   article:{
     type: String,
@@ -16,7 +16,7 @@ const Product = new Schema({
   },
   description:{
     type: String,
-    maxlength: 50
+    maxlength: 500
   },
   image:{
     type: String,
