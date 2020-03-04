@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   isLogin = false;
   faShoppingCart = faShoppingBasket;
   faUser = faUser;
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService) { }
   ngOnInit() {
   }
   logOut() {
